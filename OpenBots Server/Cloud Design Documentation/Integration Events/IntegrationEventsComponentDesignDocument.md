@@ -1,6 +1,9 @@
 Author: Dairon Hernandez
 Creation Date: 01/06/2021
 
+Updated On: 3/18/2021
+Update By: Nicole Carrero
+
 **IntegrationEvents Component**
 
 **Context**
@@ -33,34 +36,40 @@ Creation Date: 01/06/2021
     - The Event Logs Controller will be a ReadOnly Entity Controller which gives users access to the logs of all IntegrationEvents that have occured
   - IntegrationEventSubscriptionAttemptController
     - The Attempt Controller will be a ReadOnly controller that will be used view information on each transport attempt that was made on an Integration subscription
-  - IntegrationEventSubscriptionController  
-      - All IntegrationEventSubscriptions: [HttpGet("api/apiVersion/IntegrationEventSubscription")]
+  - IntegrationEventSubscriptionController
+    - NOTE: The current API version is 1.
+    - Routes:
+      - All IntegrationEventSubscriptions: [HttpGet("api/apiVersion/organizations/{organizationId}/IntegrationEventSubscription")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file contataining all IntegrationEventSubscriptions
-      - Individual IntegrationEventSubscription details: [HttpGet("api/apiVersion/IntegrationEventSubscription/{id})]
+      - Individual IntegrationEventSubscription details: [HttpGet("api/apiVersion/organizations/{organizationId}/IntegrationEventSubscription/{id})]
         - Payloads
-          - Input : IntegrationEventSubscription id
+          - Input : Organization id, IntegrationEventSubscription id
           - Output : JSON file of all IntegrationEventSubscription information for the specified id
-      - Create an IntegrationEventSubscription: [HttpPost("api/apiVersion/IntegrationEventSubscription")]
+      - Create an IntegrationEventSubscription: [HttpPost("api/apiVersion/organizations/{organizationId}/IntegrationEventSubscription")]
         - Payloads
-          - Input : IntegrationEventSubscription model 
+          - Input : Organization id, IntegrationEventSubscription model 
           - Output : JSON file listing new IntegrationEventSubscription information
-      - Update an IntegrationEventSubscription: [HttpPut("api/apiVersion/IntegrationEventSubscription/{id}")]
+      - Update an IntegrationEventSubscription: [HttpPut("api/apiVersion/organizations/{organizationId}/IntegrationEventSubscription/{id}")]
         - Payloads
-          - Input : IntegrationEventSubscription model
+          - Input : Organization id, IntegrationEventSubscription model
           - Output : JSON file listing updated IntegrationEventSubscription information
-      - Delete a IntegrationEventSubscription: [HttpDelete("api/apiVersion/IntegrationEventSubscription/{id}")]
+      - Delete a IntegrationEventSubscription: [HttpDelete("api/apiVersion/organizations/{organizationId}/IntegrationEventSubscription/{id}")]
         - Payloads
-          - Input : IntegrationEventSubscription id
+          - Input : Organization id, IntegrationEventSubscription id
           - Output : 200 OK response
-      - Edit IntegrationEventSubscription property: [HttpPatch("api/apiVersion/IntegrationEventSubscription/{id}")]
+      - Edit IntegrationEventSubscription property: [HttpPatch("api/apiVersion/organizations/{organizationId}/IntegrationEventSubscription/{id}")]
         - Payloads
-          - Input : IntegrationEventSubscription id, and JsonPatchDocument in request body with changes
+          - Input : Organization id, IntegrationEventSubscription id, and JsonPatchDocument in request body with changes
           - Output : 200 OK response
   - IntegrationEventSubscriptionAttempt Manager:
     - The IntegrationEventSubscriptionAttemptManager will inherit BaseManager and IIntegrationEventSubscriptionAttemptManager.
-      - Beyond the base class and interfaces, IntegrationEventSubscriptionAttemptManager will implement the appropriate methods to assist IntegrationEventsController.
+      - Beyond the base class and interface, IntegrationEventSubscriptionAttemptManager will implement the appropriate methods to assist IntegrationEventsController.
+  - IntegrationEventLog Manager
+    - The IntegrationEventLogManager will inherit BaseManager and IIntegrationEventLogManager.
+      - Beyond the base class and interface, IntegrationEventLogManager will implement the appropriate methods to assist IntegrationEventLogsController.
+      - If log storage is set to Azure table storage, the IntegrationEventLogManager will also use the AzureTableLoggerAdapter to add, edit, export, and delete the appropriate logs.
 
 **Sequence Diagrams**
 

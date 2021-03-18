@@ -1,7 +1,7 @@
 Author: Nicole Carrero
 Creation Date: 8/20/2020
 
-Updated On: 10/15/2020
+Updated On: 3/18/2020
 Updated By: Nicole Carrero
 
 **Automation Execution Log Component**
@@ -37,54 +37,56 @@ Updated By: Nicole Carrero
           - There will be an option to go back to the view of of all automation execution logs for the specific job.
   - AutomationExecutionLogsController:
     - The AutomationExecutionLogsController will make an API request and use the AutomationExecutionLogManager to access the AutomationExecutionLogRepository to retrieve all the automation execution logs of a specific job from the Server and will return that information back to the view.  The controller will utilize this same structure to export the list of logs to a file or retrieve individual automation execution log details.
+    - NOTE: The current API version is 1.
     - Routes:
-      - All automation execution logs for triggered job: [HttpGet("api/v1/automationexecutionlogs]
+      - All automation execution logs for triggered job: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automationexecutionlogs]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file listing automation execution logs
-      - All automation execution logs for triggered job (view model): [HttpGet("api/v1/automationexecutionlogs/view")]
+      - All automation execution logs for triggered job (view model): [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automationexecutionlogs/view")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file listing automation execution logs
-      - Count of automation execution logs: [HttpGet("api/v1/automationexecutionlogs/count")]
+      - Count of automation execution logs: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automationexecutionlogs/count")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : Count of all automation execution logs for a triggered job
-      - Get automation execution log details for triggered job: [HttpGet("api/v1/automationexecutionlogs/{id}")]
+      - Get automation execution log details for triggered job: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automationexecutionlogs/{id}")]
         - Payloads
-          - Input : Job id
+          - Input : Organization id, job id
           - Output : JSON file listing the automation execution log details for a specific job
-      - Get automation execution log details for triggered job (view model): [HttpGet("api/v1/automationexecutionlogs/view/{id}")]
+      - Get automation execution log details for triggered job (view model): [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automationexecutionlogs/view/{id}")]
         - Payloads
-          - Input : Job id
+          - Input : Organization id, job id
           - Output : JSON file listing the automation execution log details for a specific job
-      - Add a automation execution log for a job: [HttpPost("api/v1/automationexecutionlogs]
+      - Add a automation execution log for a job: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/automationexecutionlogs]
         - Payloads
-          - Input : AutomationExecutionLog data model
+          - Input : Organization id, automationExecutionLog data model
           - Output : JSON file with the created log
-      - Add automation execution log for a started job: [HttpPost("api/v1/automationexecutionlogs/startautomation]
+      - Add automation execution log for a started job: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/automationexecutionlogs/startautomation]
         - Payloads
-          - Input : AutomationExecutionLog data model
+          - Input : Organization id, AutomationExecutionLog data model
           - Output : JSON file with the created log
-      - Edit automation execution log for a triggered job: [HttpPut("api/v1/automationexecutionlogs/{id}]
+      - Edit automation execution log for a triggered job: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/automationexecutionlogs/{id}]
         - Payloads
-          - Input : AutomationExecutionLog data model
+          - Input : Organization id, AutomationExecutionLog data model
           - Output : JSON file with updated values
-       - Edit automation execution log for a completed job: [HttpPut("api/v1/automationexecutionlogs/{id}/endautomation]
+       - Edit automation execution log for a completed job: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/automationexecutionlogs/{id}/endautomation]
         - Payloads
-          - Input : AutomationExecutionLog data model
+          - Input : Organization id, AutomationExecutionLog data model
           - Output : JSON file with updated values
-       - Delete automation execution log: [HttpDelete("api/v1/automationexecutionlogs/{id}")]
+       - Delete automation execution log: [HttpDelete("api/v{apiVersion}/organizations/{organizationId}/automationexecutionlogs/{id}")]
          - Payloads
-           - Input : Automation execution log id
+           - Input : Organization id, Automation execution log id
            - Output : 200 OK response
-       - Edit automation execution log property: [HttpPatch("api/v1/automationexecutionlogs/{id}")]
+       - Edit automation execution log property: [HttpPatch("api/v{apiVersion}/organizations/{organizationId}/automationexecutionlogs/{id}")]
          - Payloads
-           - Input : Automation execution log id
+           - Input : Organization id, Automation execution log id
            - Output : 200 OK response
   - AutomationExecutionLogManager:
    - The AutomationExecutionLogManager will inherit BaseManager, which inherits IManager, and IAutomationExecutionLogManager.
       - Beyond the base class and interface, AutomationExecutionLogManager will implement the appropriate methods to assist AutomationExecutionLogsController.
+      - If log storage is set to Azure Table storage, the AutomationExecutionLogManager will use the AzureTableLoggerAdapter to add, edit, export, and delete the appropriate logs.
   - AutomationExecutionLogRepository:
     - AutomationExecutionLogRepository will inherit EntityRepository<AutomationExecutionLog>, which inherits ReadOnlyEntityRepository, and IProcessExecutionLogRepository.
     - In addition to the methods in the base class, the AutomationExecutionLogRepository will retrieve automation execution logs using a view model.

@@ -1,7 +1,7 @@
 Author: Nicole Carrero
 Creation Date: 8/18/2020
 
-Updated On: 11/11/2020
+Updated On: 3/18/2021
 Updated By: Dairon Hernandez
 
 **Credentials Component**
@@ -37,42 +37,43 @@ Updated By: Dairon Hernandez
       - There will be a button on the page to add a new credential to the list.
   - CredentialsController:
     - The CredentialsController will make an API request and access the CredentialRepository to retrieve the credentials from the Server and will return that information back to the view.  The controller will utilize this same structure to add, edit, or delete a credential.
+    - NOTE: The current API version is 1.
     - Routes:
-      - All credentials: [HttpGet("api/v1/credentials")]
+      - All credentials: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/credentials")]
         - Payloads
-          - Input : none
+          - Input : Organization id
           - Output : JSON file listing all credential information
-      - Count credentials: [HttpGet("api/v1/credentials/count")]
+      - Count credentials: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/credentials/count")]
         - Payloads
-          - Input : none
+          - Input : Organization id
           - Output : Number of credentials in the Server
-      - Credential details: [HttpGet("api/v1/credentials/{id}")]
+      - Credential details: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/credentials/{id}")]
         - Payloads
-          - Input : Credential id
+          - Input : Organization id, credential id
           - Output : JSON file listing credential details
-      - Credential view details [HttpGet("api/v1/credentials/view/{id}")]
+      - Credential view details [HttpGet("api/v{apiVersion}/organizations/{organizationId}/credentials/view/{id}")]
         - Payloads
-          - Input : Credential id
+          - Input : Organization id, credential id
           - Output : JSON file listing specific credential details (Id, Name, Provider, StartDate, EndDate, Domain, UserName, Certificate)
-      - Create a credential: [HttpPost("api/v1/credentials")]
+      - Create a credential: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/credentials")]
         - Payloads
-          - Input : Name, Provider, StartDate, EndDate, Domain, Username, PasswordSecret (SecureString to be hashed), PasswordHash, Certificate
+          - Input : Organization id, name, provider, start date, end date, domain, username, password secret (SecureString to be hashed), password hash, certificate
           - Output : 200 OK response
-      - Update a credential: [HttpPut("api/v1/credentials/{id}")]
+      - Update a credential: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/credentials/{id}")]
         - Payloads
-          - Input : Credential id, Name, Provider, StartDate, EndDate, Domain, Username, Password string (to be hashed), Password Secret, Certificate
+          - Input : Organization id, credential id, name, provider, start date, end date, domain, username, password string (to be hashed), password sSecret, certificate
           - Output : 200 OK response
-      - Update credential property: [HttpPatch("api/v1/credentials/{id}")]
+      - Update credential property: [HttpPatch("api/v{apiVersion}/organizations/{organizationId}/credentials/{id}")]
         - Payloads
-          - Input : JsonPatchDocument in request body with changes
+          - Input : Organization id, JsonPatchDocument in request body with changes
           - Output : 200 OK response
-      - Delete a credential: [HttpDelete("api/v1/credentials/{id}")]
+      - Delete a credential: [HttpDelete("api/v{apiVersion}/organizations/{organizationId}/credentials/{id}")]
         - Payloads
-          - Input : Credential id
+          - Input : Organization id, credential id
           - Output : 200 OK response
-      - Lookup list of credentials [HttpGet("api/v1/credentials/getlookup")]
+      - Lookup list of credentials [HttpGet("api/v{apiVersion}/organizations/{organizationId}/credentials/getlookup")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file listing all credential ids and names
   - CredentialManager(s):
     - The CredentialManager will inherit BaseManager, which inherits IManager.

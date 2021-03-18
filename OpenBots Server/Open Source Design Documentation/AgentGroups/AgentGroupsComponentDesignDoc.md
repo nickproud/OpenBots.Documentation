@@ -1,5 +1,8 @@
 Author: Dairon Hernandez
-Creation Date: 02/19/2020
+Creation Date: 2/19/2021
+
+Updated On: 3/18/2021
+Updated By: Nicole Carrero
 
 **AgentGroups Component**
 
@@ -35,39 +38,40 @@ Creation Date: 02/19/2020
   - AgentGroups Controller:
     - The AgentGroupsController will use the AgentGroupsManager to handle business logic for the different endpoints in addition to the existing entity controllers. The controller will contain the basic CRUD operations necessarry for the agentGroups entity, in addition to allowing users to insert new records for agentGroupMembers as well as retreiving records from agentGroupMembers
     - Routes:
-      - All agentsGroups: [HttpGet("api/v1/agentGroups")]
+    - NOTE: The current API version is 1.
+      - All agentsGroups: [HttpGet("api/v{apiVersion}/agentGroups")]
         - Payloads
           - Input : None
           - Output : JSON file listing all agentGroup information
-      - Get all group members for this agentGroup id: [HttpGet("api/v1/agentGroups/{AgentGroupId}/GetAllGroupMembers")]
+      - Get all group members for this agentGroup id: [HttpGet("api/v{apiVersion}/agentGroups/{AgentGroupId}/GetAllGroupMembers")]
         - Payloads
           - Input : agentGroup id
           - Output : Paginated list of all group members with the specified id
-      - Count agentsGroups: [HttpGet("api/v1/agentGroups/count")]
+      - Count agentsGroups: [HttpGet("api/v{apiVersion}/agentGroups/count")]
         - Payloads
           - Input : None
           - Output : Count of all agentsGroups
-      - Agent details: [HttpGet("api/v1/agents/{id}")]
+      - Agent details: [HttpGet("api/v{apiVersion}/agents/{id}")]
         - Payloads
           - Input : Agent id
           - Output : JSON file listing agent information
-      - Create an agentGroup: [HttpPost("api/v1/agentGroups")]
+      - Create an agentGroup: [HttpPost("api/v{apiVersion}/agentGroups")]
         - Payloads
           - Input : Name, Description, IsEnabled
           - Output : 200 OK response
-      - Create an agentGroup: [HttpPost("api/v1/agentGroups/{AgentGroupId/AddAgentToGroup/{AgentId}}")]
+      - Create an agentGroup: [HttpPost("api/v{apiVersion}/agentGroups/{AgentGroupId/AddAgentToGroup/{AgentId}}")]
         - Payloads
           - Input : Agent id and AgentGroup Id
           - Output : 200 OK response
-      - Edit an agentGroup: [HttpPut("api/v1/agentGroups/{id}")]
+      - Edit an agentGroup: [HttpPut("api/v{apiVersion}/agentGroups/{id}")]
         - Payloads
           - Input : Name, Description, IsEnabled
           - Output : 200 OK response
-      - Delete an agentGroup: [HttpDelete("api/v1/agentGroups/{id}")]
+      - Delete an agentGroup: [HttpDelete("api/v{apiVersion}/agentGroups/{id}")]
         - Payloads
           - Input : AgentGroup id
           - Output : 200 OK response
-      - Edit agentGroups property: [HttpPatch("api/v1/agentGroups/{id}")]
+      - Edit agentGroups property: [HttpPatch("api/v{apiVersion}/agentGroups/{id}")]
         - Payloads
           - Input : JsonPatchDocument in request body with changes
           - Output : 200 OK reposnse
@@ -84,7 +88,7 @@ Creation Date: 02/19/2020
 
 **Sequence Diagrams**
 
-- [Agent Component Sequence Diagram](https://openbots.sharepoint.com/:i:/s/OpenBotsInc/EWrHyBF29cNJva08JZDnSJABuje8nSSKbev1PePG2pxfEw?e=sP64yb)
+- [Agent Component Sequence Diagram](https://openbots.sharepoint.com/:i:/s/OpenBotsInc/EWrHyBF29cNJva08JZDnSJABuje8nSSKbev{apiVersion}PePG2pxfEw?e=sP64yb)
 
 **Unit Tests**
 

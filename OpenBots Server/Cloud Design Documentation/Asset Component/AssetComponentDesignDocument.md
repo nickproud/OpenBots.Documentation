@@ -1,7 +1,7 @@
 Author: Dairon Hernandez
 Creation Date: 08/13/2020
 
-Updated On: 3/8/2021
+Updated On: 3/18/2021
 Updated By: Nicole Carrero
 
 **Asset Component**
@@ -44,82 +44,83 @@ Updated By: Nicole Carrero
           - The user can delete each asset.
   - Assets Controller:
     - The AssetsController will make an API request to the AssetRepository to retrieve all the assets from the Server and will return that information back to the view.  The user can view all assets, view asset details, and add, edit, or delete an asset.
+    - NOTE: The current API version is 1.
     - Routes:
-      - Get all assets: [HttpGet("api/v1/assets")]
+      - Get all assets: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/assets")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file containing a list of all assets
-      - Count all assets: [HttpGet("api/v1/assets/count")]
+      - Count all assets: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/assets/count")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : Total count of assets from the Server
-      - Get asset details: [HttpGet("api/v1/assets/{id}")]
+      - Get asset details: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/assets/{id}")]
         - Payloads
-          - Input : Asset id
+          - Input : Organization id, asset id
           - Output : JSON file containing details for the provided asset id
-      - Get asset by name and type: [HttpGet("api/v1/assets/getassetbyname/{assetName}")]
+      - Get asset by name and type: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/assets/getassetbyname/{assetName}")]
         - Payloads
-          - Input : optional query parameter "?assetType={assetType}"
+          - Input : Organization id, optional query parameter "?assetType={assetType}"
           - Output : JSON file listing details for the asset with a matching name (and optional type)
-      - Add JSON asset: [HttpPost("api/v1/assets")]
+      - Add JSON asset: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/assets")]
         - Payloads
-          - Input : Asset model data (name, type, JSON value)
+          - Input : Organization id, sset model data (name, type, JSON value)
           - Output : JSON file listing new asset information
-      - Add text asset: [HttpPost("api/v1/assets")]
+      - Add text asset: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/assets")]
         - Payloads
-          - Input : Asset model data (name, type, text value)
+          - Input : Organization id, asset model data (name, type, text value)
           - Output : JSON file listing new asset information
-      - Add number asset: [HttpPost("api/v1/assets")]
+      - Add number asset: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/assets")]
         - Payloads
-          - Input : Asset model data (name, type, number value)
+          - Input : Organization id, asset model data (name, type, number value)
           - Output : JSON file listing new asset information
-      - Add file asset: [HttpPost("api/v1/assets")]
+      - Add file asset: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/assets")]
         - Payloads
-          - Input : Asset model data (name, type, file, optional drive name)
+          - Input : Organization id, asset model data (name, type, file, optional drive name)
           - Output : JSON file listing new asset information
-      - Export asset file: [HttpGet("api/v1/assets/{id}/export")]
+      - Export asset file: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/assets/{id}/export")]
         - Payloads
-          - Input : Asset id
+          - Input : Organization id, asset id
           - Output : Asset file
-      - Create agent asset: [HttpPost("api/v1/assets/addagentasset")]
+      - Create agent asset: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/assets/addagentasset")]
         - Payloads
-          - Input : Asset model data (name, agent id, optional file, optional drive name)
+          - Input : Organization is, asset model data (name, agent id, optional file, optional drive name)
           - Output : JSON file listing new agent asset information
-      - Update asset: [HttpPut("api/v1/assets/{id}")]
+      - Update asset: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/assets/{id}")]
         - Payloads
-          - Input : Name, type, value (number, text, or JSON)
+          - Input : ORganization id, name, type, value (number, text, or JSON)
           - Output : 200 OK response
-      - Update asset with file: [HttpPut("api/v1/assets/{id}/update")]
+      - Update asset with file: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/assets/{id}/update")]
         - Payloads
-          - Input : Name, file
+          - Input : Organization id, name, file
           - Output : 200 OK response
-      - Update asset property: [HttpPatch("api/v1/assets/{id}")]
+      - Update asset property: [HttpPatch("api/v{apiVersion}/organizations/{organizationId}/assets/{id}")]
         - Payloads
-          - Input : JsonPatchDocument in request body with changes
+          - Input : Organization id, JsonPatchDocument in request body with changes
           - Output : 200 OK response
-      - Delete asset: [HttpDelete("api/v1/assets/{id}")]
+      - Delete asset: [HttpDelete("api/v{apiVersion}/organizations/{organizationId}/assets/{id}")]
         - Payloads
-          - Input : Asset id
+          - Input : Organization id, asset id
           - Output : 200 OK response   
-      - Increment asset: [HttpPut("api/v1/assets/{id}/increment")]
+      - Increment asset: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/assets/{id}/increment")]
         - Payloads
-          - Input : Asset id
+          - Input : Organization id, asset id
           - Output : 200 OK response
-      - Decrement asset: [HttpPut("api/v1/assets/{id}/decrement")]
+      - Decrement asset: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/assets/{id}/decrement")]
          - Payloads
-           - Input : Asset id
+           - Input : Organization id, asset id
            - Output : 200 OK response
-      - Add to asset: [HttpPut("api/v1/assets/{id}/add?value={number}")]
+      - Add to asset: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/assets/{id}/add?value={number}")]
         - Payloads
-          - Input : Asset id, number to add
+          - Input : Organization id, asset id, number to add
           - Output : 200 OK response
-      - Subtract from asset: [HttpPut("api/v1/assets/{id}/subtract?value={number}")]
+      - Subtract from asset: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/assets/{id}/subtract?value={number}")]
         - Payloads
-          - Input : Asset id, number to subtract
+          - Input : Organization id, asset id, number to subtract
           - Output : 200 OK response
-      - Append text to asset: [HttpPut("api/v1/assets/{id}/append?value={text}")]
+      - Append text to asset: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/assets/{id}/append?value={text}")]
         - Payloads
-          - Input : Asset id, text to append
+          - Input : Organization id, asset id, text to append
           - Output : 200 OK response
   - Asset Manager:
     - The AssetManager will inherit BaseManager, which inherits IManager, and IAssetManager.

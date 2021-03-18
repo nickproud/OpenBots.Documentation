@@ -1,8 +1,8 @@
 Author: Dairon Hernandez
-Creation Date: 08/06/2020
+Creation Date: 8/06/2020
 
-Updated On: 01/28/2021
-Updated By: Dairon Hernandez
+Updated On: 3/18/2021
+Updated By: Nicole Carrero
 
 **Agent Component**
 
@@ -40,55 +40,56 @@ Updated By: Dairon Hernandez
   - Agent Controller:
     - The AgentsController will make an API request and use the AgentManager to access the AgentRepository to retrieve all the agents from the Server and will return that information back to the view. The controller will utilize this same structure to view, add, edit, or remove an agent.  Additionally, the AgentController can receive a connect, disconnect, or a heartbeat request, which will be handled by the AgentManager.
     - Routes:
-      - All agents: [HttpGet("api/v1/agents")]
+    - NOTE: The current API version is 1.
+      - All agents: [HttpGet("api/v{apiVersion}/agents")]
         - Payloads
           - Input : None
           - Output : JSON file listing all agent information
-      - All agents viewmodel: [HttpGet("api/v1/agents/view")]
+      - All agents viewmodel: [HttpGet("api/v{apiVersion}/agents/view")]
         - Payloads
           - Input : None
           - Output : JSON file listing all agent viewmodel information
-      - Count agents: [HttpGet("api/v1/agents/count")]
+      - Count agents: [HttpGet("api/v{apiVersion}/agents/count")]
         - Payloads
           - Input : None
           - Output : Count of all agents
-      - Agent details: [HttpGet("api/v1/agents/{id}")]
+      - Agent details: [HttpGet("api/v{apiVersion}/agents/{id}")]
         - Payloads
           - Input : Agent id
           - Output : JSON file listing agent information
-      - Create an agent: [HttpPost("api/v1/agents")]
+      - Create an agent: [HttpPost("api/v{apiVersion}/agents")]
         - Payloads
           - Input : Name, MachineName, MacAddresses, IPAddresses, MachineCredentials, and IsEnabled
           - Output : 200 OK response
-      - Edit an agent: [HttpPut("api/v1/agents/{id}")]
+      - Edit an agent: [HttpPut("api/v{apiVersion}/agents/{id}")]
         - Payloads
           - Input : Agent id, Name, MachineName, MacAddresses, IPAddresses, IsEnabled, LastReportedOn, LastReportedStatus, LastReportedWork, LastReportedMessage, IsHealthy, and CredentialId
           - Output : 200 OK response
-      - Delete an agent: [HttpDelete("api/v1/agents/{id}")]
+      - Delete an agent: [HttpDelete("api/v{apiVersion}/agents/{id}")]
         - Payloads
           - Input : Agent id
           - Output : 200 OK response
-      - Edit agent property: [HttpPatch("api/v1/agents/{id}")]
+      - Edit agent property: [HttpPatch("api/v{apiVersion}/agents/{id}")]
         - Payloads
           - Input : JsonPatchDocument in request body with changes
           - Output : 200 OK reposnse
-      - Connect verified machine: [HttpPatch("api/v1/agents/connect")]
+      - Connect verified machine: [HttpPatch("api/v{apiVersion}/agents/connect")]
         - Payloads
           - Input : JsonPatchDocument in request body with MacAddresses and MachineName changes
           - Output : AgentId, AgentName
-      - Disconnect verified machine [HttpPatch("api/v1/agents/disconnect")]
+      - Disconnect verified machine [HttpPatch("api/v{apiVersion}/agents/disconnect")]
         - Payloads
           - Input : JsonPatchDocument in request body with AgentId, MachineName, and MacAdresses changes
           - Output : 200 OK response
-      - Agent heartbeat: [HttpPost("api/v1/agents/{AgentId}/AddHeartbeat")]
+      - Agent heartbeat: [HttpPost("api/v{apiVersion}/agents/{AgentId}/AddHeartbeat")]
         - Payloads
           - Input : Heartbeat viewmodel containing lastUpdated fields
           - Output : 200 OK containing the created AgentHeartbeat      
-      - Get Agent heartbeats: [HttpGet("api/v1/agents/{AgentId}/AgentHeartbeats")]
+      - Get Agent heartbeats: [HttpGet("api/v{apiVersion}/agents/{AgentId}/AgentHeartbeats")]
         - Payloads
           - Input : AgentId
           - Output : 200 OK containing the created AgentHeartbeat  
-      - Agents lookup: [HttpGet("api/v1/agents/getlookup")]
+      - Agents lookup: [HttpGet("api/v{apiVersion}/agents/getlookup")]
         - Payloads
           - Input : None
           - Output : List of AgentIds and AgentNames

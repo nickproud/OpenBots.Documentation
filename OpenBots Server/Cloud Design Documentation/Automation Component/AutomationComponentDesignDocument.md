@@ -1,8 +1,8 @@
 Author: Nicole Carrero
 Creation Date: 8/14/2020
 
-Updated On: 3/9/2021
-Updated By: Dairon Hernandez
+Updated On: 3/18/2021
+Updated By: Nicole Carrero
 
 **Automation Component**
 
@@ -40,62 +40,63 @@ Updated By: Dairon Hernandez
     - On the same page, administrators will have the option to add/upload an automation manually.
   - AutomationsController:
     - The AutomationsController will make an API request and use the AutomationManager to access the AutomationRepository to retrieve all the automations from the Server and will return that information back to the view.  The controller will utilize this same structure to upload, export, edit, or delete an automation.
+    - NOTE: The current API version is 1.
     - Routes:
-      - All automations: [HttpGet("api/v1/automations")]
+      - All automations: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automations")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file listing all automation information
-      - All automations (view model) [HttpGet("api/v1/automations/view")]
+      - All automations (view model) [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automations/view")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file listing all automation view model information
-      - Count automations: [HttpGet("api/v1/automations")]
+      - Count automations: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automations")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : Number of automations in Server
-      - Automation details: [HttpGet("api/v1/automations/{id}")]
+      - Automation details: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automations/{id}")]
         - Payloads
-          - Input : Automation id
+          - Input : Organization id, automation id
           - Output : JSON file listing specific automation information
-      - Automation details (view model): [HttpGet("api/v1/automations/view/{id}")]
+      - Automation details (view model): [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automations/view/{id}")]
         - Payloads
-          - Input : Automation id
+          - Input : Organization id, automation id
           - Output : JSON file listing specific automation view model information
-      - Add an automation: [HttpPost("api/v1/automations")]
+      - Add an automation: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/automations")]
         - Payloads
-          - Input : Automation model data (name, automation engine, file, and optional drive name)
+          - Input : Organization id, Automation model data (name, automation engine, file, and optional drive name)
           - Output : JSON file listing new automation information
-      - Upload automation file: [HttpPost("api/v1/automations/{id}/upload")]
+      - Upload automation file: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/automations/{id}/upload")]
         - Payloads
-          - Input : Automation file
+          - Input : Organization id, automation file
           - Output : JSON file listing updated automation information
-      - Update automation with file (create new automation with updated version): [HttpPost("api/v1/automations/{id}/update")]
+      - Update automation with file (create new automation with updated version): [HttpPost("api/v{apiVersion}/organizations/{organizationId}/automations/{id}/update")]
         - Payloads
-          - Input : Automation id, file, name, drive name (optional)
+          - Input : Organization id, automation id, file, name, drive name (optional)
           - Output : JSON file listing updated automation information
-      - Update automation: [HttpPut("api/v1/automations/{id}")]
+      - Update automation: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/automations/{id}")]
         - Payloads
-          - Input : Automation id, Automation name
+          - Input : Organization id, automation id, automation name
           - Output : JSON file listing updated automation information
-      - Export an automation: [HttpGet("api/v1/automations/{id}")]
+      - Export an automation: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automations/{id}")]
         - Payloads
-          - Input : Automation id
+          - Input : Organization id, utomation id
           - Output : Automation file
-      - Edit automation property: [HttpPatch("api/v1/automations/{id}")]
+      - Edit automation property: [HttpPatch("api/v{apiVersion}/organizations/{organizationId}/automations/{id}")]
         - Payloads
-          - Input : JsonPatchDocument in request body with changes
+          - Input : Organization id, JsonPatchDocument in request body with changes
           - Output : 200 OK response
-      - Delete an automation: [HttpDelete("api/v1/automations/{id}")]
+      - Delete an automation: [HttpDelete("api/v{apiVersion}/organizations/{organizationId}/automations/{id}")]
         - Payloads
-          - Input : Automation id, drive name (optional)
+          - Input : Organization id, automation id, drive name (optional)
           - Output : 200 OK response
-      - Automation lookup: [HttpGet("api/v1/automations/getlookup")]
+      - Automation lookup: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automations/getlookup")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file listing automation id, name, and name with version
-      - Update Automation Parameters: [HttpPost("api/v1/automations/automationId/UpdateParameters")]
+      - Update Automation Parameters: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/automations/automationId/UpdateParameters")]
         - Payloads
-          - Input : JSON body containing a list of automation parameters
+          - Input : Organization id, JSON body containing a list of automation parameters
           - Output : JSON file listing new automation parameters
   - AutomationManager:
     - The AutomationManager will inherit BaseManager, which inherits IManager, and IAutomationManager.

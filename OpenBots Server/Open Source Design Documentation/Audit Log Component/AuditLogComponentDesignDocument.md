@@ -1,7 +1,7 @@
 Author: Nicole Carrero
 Creation Date: 8/4/2020
 
-Updated On: 1/7/2021
+Updated On: 3/18/2021
 Updated By: Nicole Carrero
 
 **Audit Log Component**
@@ -39,31 +39,32 @@ Updated By: Nicole Carrero
   - AuditLogs Controller:
     - The AuditLogsController will make an API request to the AuditLogsRepository to retrieve audit logs from the Server and will return that information back to the view.  The user can view all audit logs or individual audit log details as well as export a file of a list of audit logs.
     - Routes:
-      - All audit logs: [HttpGet("api/v1/auditlogs")]
+    - NOTE: The current API version is 1.
+      - All audit logs: [HttpGet("api/v{apiVersion}/auditlogs")]
         - Payloads
           - Input : None
           - Output : JSON file listing audit log information
-      - All audit logs (view model): [HttpGet("api/v1/auditlogs/view")]
+      - All audit logs (view model): [HttpGet("api/v{apiVersion}/auditlogs/view")]
         - Payloads
           - Input : None
           - Output : JSON file listing audit log view model information
-      - Count audit logs: [HttpGet("api/v1/auditlogs/count")]
+      - Count audit logs: [HttpGet("api/v{apiVersion}/auditlogs/count")]
         - Payloads
           - Input : None
           - Output : Number of audit logs in Server
-     - Individual audit log details: [HttpGet("api/v1/auditlogs/{id}")]
+     - Individual audit log details: [HttpGet("api/v{apiVersion}/auditlogs/{id}")]
        - Payloads
          - Input : Audit log id
          - Output : JSON file listing the audit log details for a specific audit log
-    - Individual audit log details: [HttpGet("api/v1/auditlogs/{id}/view")]
+    - Individual audit log details: [HttpGet("api/v{apiVersion}/auditlogs/{id}/view")]
       - Payloads
         - Input : Audit log id
         - Output : JSON file listing the audit log view model details for a specific audit log.
-     - Audit logs lookup: [HttpGet("api/v1/auditlogs/auditlogslookup")]
+     - Audit logs lookup: [HttpGet("api/v{apiVersion}/auditlogs/auditlogslookup")]
        - Payloads
          - Input : None
          - Output : List of Service Names
-     - Export audit logs: [HttpGet("api/v1/auditlogs/export")]
+     - Export audit logs: [HttpGet("api/v{apiVersion}/auditlogs/export")]
        - Payloads
          - Input : None
          - Output : CSV/JSON/zip file listing audit log information

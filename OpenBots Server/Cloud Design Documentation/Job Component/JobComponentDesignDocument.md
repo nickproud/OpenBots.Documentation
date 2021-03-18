@@ -1,8 +1,8 @@
 Author: Nicole Carrero
 Creation Date: 8/18/2020
 
-Updated On: 03/09/2021
-Updated By: Dairon Hernandez
+Updated On: 03/18/2021
+Updated By: Nicole Carrero
 
 **Job Component**
 
@@ -36,65 +36,67 @@ Updated By: Dairon Hernandez
         - The user can click on links to redirect to either the Process or Agent details.
   - JobsController:
     - The JobsController will make an API request, access the JobRepository to retrieve all the jobs from the Server, and will return that information back to the view.  The controller will utilize this same structure to create, edit, or delete a job.
-      - All jobs: [HttpGet("api/v1/jobs")]
+    - NOTE: The current API version is 1.
+    - Routes:
+      - All jobs: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/jobs")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file listing all triggered job information
-      - All jobs (uses view model): [HttpGet("api/v1/jobs/view")]
+      - All jobs (uses view model): [HttpGet("api/v{apiVersion}/organizations/{organizationId}/jobs/view")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file listing triggered job information
-      - Count all jobs: [HttpGet("api/v1/jobs/count")]
+      - Count all jobs: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/jobs/count")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : Count of all jobs
-      - Count all jobs by status [HttpGet("api/v1/jobs/countbystatus")]
+      - Count all jobs by status [HttpGet("api/v{apiVersion}/organizations/{organizationId}/jobs/countbystatus")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : Count of all jobs grouped by status
-      - Job / Agent lookup: [HttpGet("api/v1/jobs/jobagentslookup")]
+      - Job / Agent lookup: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/jobs/jobagentslookup")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file of related process and agent information
-      - Individual job details: [HttpGet("api/v1/jobs/{id}")]
+      - Individual job details: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/jobs/{id}")]
         - Payloads
-          - Input : Job id
+          - Input : Organization id, job id
           - Output : JSON file of all individual job information
-      - Individual job details (uses view model): [HttpGet("api/v1/jobs/view/{id}")]
+      - Individual job details (uses view model): [HttpGet("api/v{apiVersion}/organizations/{organizationId}/jobs/view/{id}")]
         - Payloads
-          - Input : Job id
+          - Input : Organization id, job id
           - Output : JSON file listing  individual job information
-      - Get next available job for agent: [HttpGet("api/v1/jobs/next")]
+      - Get next available job for agent: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/jobs/next")]
         - Payloads
-          - Input : Agent id
+          - Input : Organization id, agent id
           - Output : JSON file listing next available job information
-      - Create a job: [HttpPost("api/v1/jobs")]
+      - Create a job: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/jobs")]
         - Payloads
-          - Input : Job model
+          - Input : Organization id, Job model data
           - Output : JSON file listing new job information
-      - Edit a job: [HttpPut("api/v1/jobs/{id}")]
+      - Edit a job: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/jobs/{id}")]
         - Payloads
-          - Input : Job model
+          - Input : Organization id, Job model data
           - Output : JSON file listing updated job information
-      - Edit job with specified status (uses view model): [HttpPut("api/v1/jobs/{id}/status/{status}")]
+      - Edit job with specified status (uses view model): [HttpPut("api/v{apiVersion}/organizations/{organizationId}/jobs/{id}/status/{status}")]
         - Payloads
-          - Input : Job id, Job status, Agent id, job errors (error reason, error code, serailized error)
+          - Input : Organization id, job id, job status, agent id, job errors (error reason, error code, serailized error)
           - Output : JSON file listing updated job information
-      - Delete a job: [HttpDelete("api/v1/jobs/{id}")]
+      - Delete a job: [HttpDelete("api/v{apiVersion}/organizations/{organizationId}/jobs/{id}")]
         - Payloads
-          - Input : Job id
+          - Input : Organization id, job id
           - Output : 200 OK response
-      - Edit job property: [HttpPatch("api/v1/jobs/{id}")]
+      - Edit job property: [HttpPatch("api/v{apiVersion}/organizations/{organizationId}/jobs/{id}")]
         - Payloads
-          - Input : JsonPatchDocument in request body with changes
+          - Input : Organization id, JsonPatchDocument in request body with changes
           - Output : 200 OK response
-      - Create a job checkpoint: [HttpPost("api/v1/jobs/JobId/,JobCheckpoint")]
+      - Create a job checkpoint: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/jobs/JobId/,JobCheckpoint")]
       - Payloads
-        - Input : JobCheckpoint model
+        - Input : Organization id, JobCheckpoint model data
         - Output : JSON file listing new job checkpoint information
-      - All Checkpoints belonging to the specified JobId: [HttpGet("api/v1/jobs/JobId/JobCheckpoint")]
+      - All Checkpoints belonging to the specified JobId: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/jobs/JobId/JobCheckpoint")]
         - Payloads
-          - Input : jobId 
+          - Input : Organization id, job id
           - Output : JSON file listing checkpoints for the specified jobId
   - JobManager:
     - The JobManager will inherit BaseManager, which inherits IManager, and IJobManager.

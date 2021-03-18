@@ -1,7 +1,7 @@
 Author: Nicole Carrero
 Creation Date: 2/9/2021
 
-Updated On: 3/5/2021
+Updated On: 3/18/2021
 Updated By: Nicole Carrero
 
 **File Component**
@@ -40,72 +40,73 @@ Updated By: Nicole Carrero
             - The user can refresh the page using the refresh button.
   - Files Controller:
     - The FilesController will make an API request to the FileManager, which in turn will call the appropriate adapter.  The ServerFileRepository, ServerFolderRepository, and ServerDriveRepository will be used to retrieve all the files, folders, and/or drives from the Server and will return that information back to the view.  The user can view all files, folders, and/or drives, view file, folder, or drive details, and add, edit (rename, move, or copy), or delete a file or folder.  The user can also export a file.
-    - NOTE: Most APIs listed below use an additional optional query parameter if the user requests access to a file, folder, or drive that is not the default "Files" drive.  For instance, get all files and folders would look like this: [HttpGet("api/v1/files?driveName={driveName}")].
+    - NOTE: Most APIs listed below use an additional optional query parameter if the user requests access to a file, folder, or drive that is not the default "Files" drive.  For instance, get all files and folders would look like this: [HttpGet("api/v{apiVersion}/files?driveName={driveName}")].
     - Routes:
-      - All files and folders: [HttpGet("api/v1/files")]
+    - NOTE: The current API version is 1.
+      - All files and folders: [HttpGet("api/v{apiVersion}/files")]
         - Payloads
           - Input : Drive name (optional)
           - Output : JSON file listing all file and folder information
-      - All child files and folders within a parent folder: [HttpGet("api/v1/files?$filter=ParentId+eq+guid'{parentId}'")]
+      - All child files and folders within a parent folder: [HttpGet("api/v{apiVersion}/files?$filter=ParentId+eq+guid'{parentId}'")]
         - Payloads 
           - Input : Drive name (optional), parent id
           - Output : JSON file listing all child file and folder information
-      - All files: [HttpGet("api/v1/files")]
+      - All files: [HttpGet("api/v{apiVersion}/files")]
         - Payloads
           - Input : Drive name (optional), file query parameter (?file=true - optional)
           - Output : JSON file listing all file information
-      - All folders: [HttpGet("api/v1/files?file=false")]
+      - All folders: [HttpGet("api/v{apiVersion}/files?file=false")]
         - Payloads
           - Input : Drive name (optional)
           - Output : JSON file listing all folder information
-      - File count: [HttpGet("api/v1/files/count")]
+      - File count: [HttpGet("api/v{apiVersion}/files/count")]
         - Payloads
           - Input : Drive name (optional)
           - Output : Count of all files
-      - Folder count: [HttpGet("api/v1/files/count/folder")]
+      - Folder count: [HttpGet("api/v{apiVersion}/files/count/folder")]
         - Payloads
           - Input : Drive name (optional)
           - Output : Count of all folders
-      - Folder or file details: [HttpGet("api/v1/files/{id}")]
+      - Folder or file details: [HttpGet("api/v{apiVersion}/files/{id}")]
         - Payloads
           - Input : Folder or file id, drive name (optional)
           - Output : JSON file listing specific file or folder information
-      - Drive details: [HttpGet("api/v1/files/drive")]
+      - Drive details: [HttpGet("api/v{apiVersion}/files/drive")]
         - Payloads
           - Input : Drive name (optional)
           - Output : JSON file listing all drive information
-      - Upload files: [HttpPost("api/v1/files")]
+      - Upload files: [HttpPost("api/v{apiVersion}/files")]
         - Payloads
           - Input : Drive name (optional), storage path, files, is file (optional - true)
           - Output : JSON file listing newly created file information
-      - Create folder: [HttpPost("api/v1/files")]
+      - Create folder: [HttpPost("api/v{apiVersion}/files")]
         - Payloads
           - Input : Drive name (optional), folder name, storage path, is file (set to false)
           - Output : JSON file listing newly created folder information
-      - Export file: [HttpGet("api/v1/files/{id}/download"]
+      - Export file: [HttpGet("api/v{apiVersion}/files/{id}/download"]
           - Input : File id, drive name (optional)
           - Output : File in its original format
-      - Delete folder or file: [HttpDelete("api/v1/files/{id}")]
+      - Delete folder or file: [HttpDelete("api/v{apiVersion}/files/{id}")]
         - Payloads
           - Input : Folder or file id, drive name (optional)
           - Output : 200 OK response
-      - Rename folder or file: [HttpPut("api/v1/files/{id}/rename")]
+      - Rename folder or file: [HttpPut("api/v{apiVersion}/files/{id}/rename")]
         - Payloads
           - Input : Folder or file id, folder or file name, drive name (optional)
           - Output : JSON file listing updated folder or file information
-      - Move folder or file: [HttpPut("api/v1/files/{id}/move/{parentId}")]
+      - Move folder or file: [HttpPut("api/v{apiVersion}/files/{id}/move/{parentId}")]
         - Payloads
           - Input : Folder or file id, parent folder id, drive name (optional)
           - Output : JSON file listing updated folder or file information
-      - Copy folder or file: [HttpPost("api/v1/files/{id}/copy/{parentId}")]
+      - Copy folder or file: [HttpPost("api/v{apiVersion}/files/{id}/copy/{parentId}")]
         - Payloads
           - Input : Folder or file id, parent folder id, drive name (optional)
           - Output : JSON file listing new folder or file information
-      - Create drive: [HttpPost("api/v1/files/drive?driveName={driveName}")]
+      - Create drive: [HttpPost("api/v{apiVersion}/files/drive?driveName={driveName}")]
         - Payloads
           - Input : Drive name
           - Output : JSON file listing newly created server drive information
-      - Drive names: [HttpGet("api/v1/files/driveNames?adapterType={adapterType}")]
+      - Drive names: [HttpGet("api/v{apiVersion}/files/driveNames?adapterType={adapterType}")]
         - Payloads
           - Input: Adapter type (default: LocalFileStorage)
           - Output : JSON file listing drive names and their entity ids

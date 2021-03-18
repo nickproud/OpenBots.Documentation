@@ -1,6 +1,9 @@
 Author: Dairon Hernandez
 Creation Date: 01/06/2021
 
+Updated On: 3/18/2021
+Updated By: Nicole Carrero
+
 **IntegrationEvents Component**
 
 **Context**
@@ -27,34 +30,36 @@ Creation Date: 01/06/2021
         - Subscriptions Tab: Will contain a list of all existing subscriptions and additionally contains a button that allows users to create new subscriptions
         - Add Subscriptions Tab: Allows users to create new subscriptions
         - Logs Tab: Displays a paginated list of all IntegrationEvents that have occured in descending order
-  - IntegrationEventsController:
+  - IntegrationEvents Controller:
     - The EventsController will be a ReadOnly controller which will be used to access the data stored inside the IntegrationEvents table.
-  - InegrationEventLogsController
-    - The Event Logs Controller will be a ReadOnly Entity Controller which gives users access to the logs of all IntegrationEvents that have occured
+  - InegrationEventLogs Controller
+    - The EventLogs Controller will be a ReadOnly Entity Controller which gives users access to the logs of all IntegrationEvents that have occured
   - IntegrationEventSubscriptionAttemptController
     - The Attempt Controller will be a ReadOnly controller that will be used view information on each transport attempt that was made on an Integration subscription
-  - IntegrationEventSubscriptionController  
-      - All IntegrationEventSubscriptions: [HttpGet("api/apiVersion/IntegrationEventSubscription")]
+  - IntegrationEventSubscriptionController
+    - NOTE: The current API version is 1.
+    - Routes:
+      - All IntegrationEventSubscriptions: [HttpGet("api/v{v{apiVersion}}/IntegrationEventSubscription")]
         - Payloads
           - Input : None
           - Output : JSON file contataining all IntegrationEventSubscriptions
-      - Individual IntegrationEventSubscription details: [HttpGet("api/apiVersion/IntegrationEventSubscription/{id})]
+      - Individual IntegrationEventSubscription details: [HttpGet("api/v{v{apiVersion}}/IntegrationEventSubscription/{id})]
         - Payloads
           - Input : IntegrationEventSubscription id
           - Output : JSON file of all IntegrationEventSubscription information for the specified id
-      - Create an IntegrationEventSubscription: [HttpPost("api/apiVersion/IntegrationEventSubscription")]
+      - Create an IntegrationEventSubscription: [HttpPost("api/v{v{apiVersion}}/IntegrationEventSubscription")]
         - Payloads
           - Input : IntegrationEventSubscription model 
           - Output : JSON file listing new IntegrationEventSubscription information
-      - Update an IntegrationEventSubscription: [HttpPut("api/apiVersion/IntegrationEventSubscription/{id}")]
+      - Update an IntegrationEventSubscription: [HttpPut("api/v{v{apiVersion}}/IntegrationEventSubscription/{id}")]
         - Payloads
           - Input : IntegrationEventSubscription model
           - Output : JSON file listing updated IntegrationEventSubscription information
-      - Delete a IntegrationEventSubscription: [HttpDelete("api/apiVersion/IntegrationEventSubscription/{id}")]
+      - Delete a IntegrationEventSubscription: [HttpDelete("api/v{v{apiVersion}}/IntegrationEventSubscription/{id}")]
         - Payloads
           - Input : IntegrationEventSubscription id
           - Output : 200 OK response
-      - Edit IntegrationEventSubscription property: [HttpPatch("api/apiVersion/IntegrationEventSubscription/{id}")]
+      - Edit IntegrationEventSubscription property: [HttpPatch("api/v{v{apiVersion}}/IntegrationEventSubscription/{id}")]
         - Payloads
           - Input : IntegrationEventSubscription id, and JsonPatchDocument in request body with changes
           - Output : 200 OK response

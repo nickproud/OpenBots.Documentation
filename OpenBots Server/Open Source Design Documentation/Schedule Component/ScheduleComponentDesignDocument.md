@@ -1,8 +1,8 @@
 Author: Nicole Carrero
 Creation Date:  8/19/2020
 
-Updated On: 03/09/2021
-Updated By: Dairon Hernandez
+Updated On: 3/18/2021
+Updated By: Nicole Carrero
 
 **Schedule Component**
 
@@ -35,40 +35,41 @@ Updated By: Dairon Hernandez
         - The user can click on each schedule to view, edit, or delete it.
   - SchedulesController:
     - The SchedulesController will make an API request and use the ScheduleManager to access the ScheduleRepository to retrieve all the schedules from the Server and will return that information back to the view.  The controller will utilize this same structure to view, add, edit, or remove a schedule.
+    - NOTE: The current API version is 1.
     - Routes:
-      - All schedules: [HttpGet("api/v1/schedules")]
+      - All schedules: [HttpGet("api/v{apiVersion}/schedules")]
         - Payloads
           - Input : None
           - Output : JSON file listing all schedule information
-      - Count schedules: [HttpGet("api/v1/schedules/count")]
+      - Count schedules: [HttpGet("api/v{apiVersion}/schedules/count")]
         - Payloads
           - Input : None
           - Output : Count of all schedules in the Server
-      - Schedule Details: [HttpGet("api/v1/schedules/{id}")]
+      - Schedule Details: [HttpGet("api/v{apiVersion}/schedules/{id}")]
         - Payloads
           - Input : Schedule id
           - Output : JSON file listing schedule information
-      - Schedule Details: [HttpGet("api/v1/schedules/{id}/View")]
+      - Schedule Details: [HttpGet("api/v{apiVersion}/schedules/{id}/View")]
         - Payloads
           - Input : Schedule id
           - Output : JSON file listing schedule information with additional viewmodel details
-      - Create a schedule: [HttpPost("api/v1/schedules")]
+      - Create a schedule: [HttpPost("api/v{apiVersion}/schedules")]
         - Payloads
           - Input : Schedule data model
           - Output : 200 OK response
-      - Edit a schedule: [HttpPut("api/v1/schedules/{id}")]
+      - Edit a schedule: [HttpPut("api/v{apiVersion}/schedules/{id}")]
         - Payloads
           - Input : Schedule data model
           - Output : 200 OK response
-      - Delete a schedule: [HttpDelete("api/v1/scheduled/{id}")]
+      - Delete a schedule: [HttpDelete("api/v{apiVersion}/scheduled/{id}")]
         - Payloads
           - Input : Schedule id
           - Output : 200 OK response
-      - Edit a schedule property: [HttpPatch("api/v1/schedules/{id}")]
+      - Edit a schedule property: [HttpPatch("api/v{apiVersion}/schedules/{id}")]
         - Payloads
           - Input : JSONPatchDocument in request body with changes
           - Output : 200 OK response
-      - API to run a Job "NOW": [HttpPatch("api/v1/schedules/{id}/runnow")]
+      - API to run a Job "NOW": [HttpPatch("api/v{apiVersion}/schedules/{id}/runnow")]
         - Payloads
           - Input : RunNowViewModel containing automationId and agentId
           - Output : 200 OK response if run to attempt was successful

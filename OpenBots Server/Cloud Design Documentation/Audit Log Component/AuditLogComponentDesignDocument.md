@@ -1,7 +1,7 @@
 Author: Nicole Carrero
 Creation Date: 8/4/2020
 
-Updated On: 1/7/2021
+Updated On: 3/18/2021
 Updated By: Nicole Carrero
 
 **Audit Log Component**
@@ -38,38 +38,40 @@ Updated By: Nicole Carrero
       - There will be an option to go back to the view of of all audit logs.
   - AuditLogs Controller:
     - The AuditLogsController will make an API request to the AuditLogsRepository to retrieve audit logs from the Server and will return that information back to the view.  The user can view all audit logs or individual audit log details as well as export a file of a list of audit logs.
+    - NOTE: The current API version is 1.
     - Routes:
-      - All audit logs: [HttpGet("api/v1/auditlogs")]
+      - All audit logs: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/auditlogs")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file listing audit log information
-      - All audit logs (view model): [HttpGet("api/v1/auditlogs/view")]
+      - All audit logs (view model): [HttpGet("api/v{apiVersion}/organizations/{organizationId}/auditlogs/view")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file listing audit log view model information
-      - Count audit logs: [HttpGet("api/v1/auditlogs/count")]
+      - Count audit logs: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/auditlogs/count")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : Number of audit logs in Server
-     - Individual audit log details: [HttpGet("api/v1/auditlogs/{id}")]
+     - Individual audit log details: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/auditlogs/{id}")]
        - Payloads
-         - Input : Audit log id
+         - Input : Organization id, audit log id
          - Output : JSON file listing the audit log details for a specific audit log
-    - Individual audit log details: [HttpGet("api/v1/auditlogs/{id}/view")]
+    - Individual audit log details: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/auditlogs/{id}/view")]
       - Payloads
-        - Input : Audit log id
+        - Input : Organization id, audit log id
         - Output : JSON file listing the audit log view model details for a specific audit log.
-     - Audit logs lookup: [HttpGet("api/v1/auditlogs/auditlogslookup")]
+     - Audit logs lookup: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/auditlogs/auditlogslookup")]
        - Payloads
-         - Input : None
+         - Input : Organization id
          - Output : List of Service Names
-     - Export audit logs: [HttpGet("api/v1/auditlogs/export")]
+     - Export audit logs: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/auditlogs/export")]
        - Payloads
-         - Input : None
+         - Input : Organization id
          - Output : CSV/JSON/zip file listing audit log information
   - AuditLog Manager:
-    - - The AuditLogManager will inherit IAuditLogManager and BaseManager, which inherits IManager.
+    - The AuditLogManager will inherit IAuditLogManager and BaseManager, which inherits IManager.
       - Beyond the base class and interfaces, AuditLogManager will implement the appropriate methods to assist AuditLogsController.
+      - If log storage is set to Azure Table storage, the AuditLogManager will also use the AzureTableLoggerAdapter to add, edit, export, and delete the appropriate logs.
   - AuditLog Repository:
     - The AuditLogRepository will retrieve all audit logs or the details of an individual audit log.  It will utilize the appropriate methods to assist the AuditLogsController and AuditLogManager.
 - Model / View Models:

@@ -1,7 +1,7 @@
 Author: Dairon Hernandez
 Creation Date: 9/15/2020
 
-Updated On: 10/15/2020
+Updated On: 3/18/2020
 Updated By: Nicole Carrero
 
 **Automation Log Component**
@@ -39,34 +39,36 @@ Updated By: Nicole Carrero
         - There will be a button to export all automation logs into a CSV file.
   - AutomationLogsController:
     - The AutomationLogsController will make an API request and use the AutomationLogManager to access the AutomationLogRepository to retrieve all the logs of a specific job from the Server and will return that information back to the view.  The controller will utilize this same structure to export the list of logs to a file, retrieve individual log details, or create/edit an automation log.
+    - NOTE: The current API version is 1.
     - Routes:
-      - All automation logs: [HttpGet("api/v1/automationlogs")]
+      - All automation logs: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automationlogs")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file listing all automation logs
-      - Count of automation logs: [HttpGet("api/v1/automationlogs/count")]
+      - Count of automation logs: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automationlogs/count")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : Count of all automation logs
-      - Get individual automation log details for triggered job: [HttpGet("api/v1/automationlogs/{id}")]
+      - Get individual automation log details for triggered job: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automationlogs/{id}")]
         - Payloads
-          - Input : Automation log id
+          - Input : Organization id, automation log id
           - Output : JSON file with details about the automation log for the given id
-      - Export automation log: [HttpGet("api/v1/automationlogs/export/{filetype?}")]
+      - Export automation log: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/automationlogs/export/{filetype?}")]
         - Payloads
-          - Input : Job id and (optional) file type
+          - Input : Organization id, job id, file type (optional)
           - Output : CSV, Zip, or JSON file listing all automation log details
-      - Create automation log: [HttpPost("api/v1/automationlogs")]
+      - Create automation log: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/automationlogs")]
         - Payloads
-          - Input : AutomationLog model
+          - Input : Organization id, AutomationLog model data
           - Output : JSON file with the created log
-      - Edit automation log: [HttpPut("api/v1/automationlogs/{id}")]
+      - Edit automation log: [HttpPut("api//organizations/{organizationId}/automationlogs/{id}")]
         - Payloads
-          - Input : Automation log id
+          - Input : Organization id, automation log id
           - Output : JSON file with updated automation log information
-  - AutomationLogManager:
+  - AutomationLog Manager:
    - The AutomationLogManager will inherit BaseManager, which inherits IManager, and IAutomationLogManager.
       - Beyond the base class and interfaces, AutomationLogManager will implement the appropriate methods to assist the AutomationLogsController, which will be used when exporting automation logs.
+      - If log storage is set to Azure Table storage, the AutomationLogManager will also use the AzureTableLoggerAdapter to add, edit, export, and delete the appropriate logs.
   - AutomationLogRepository:
    - The AutomationLogRepository will inherit EntityRepository<AutomationLog>, which inherits ReadOnlyEntityRepository, and IAutomationLogRepository.
      - In addition to the methods inherited from the base class, the AutomationLogRepository will retrieve automation logs by job id, or the details of an individual automation log.

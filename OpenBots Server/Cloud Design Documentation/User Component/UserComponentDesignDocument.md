@@ -1,7 +1,7 @@
 Author: Nicole Carrero
 Creation Date: 8/24/2020
 
-Updated On: 10/30/2020
+Updated On: 3/18/2021
 Updated By: Nicole Carrero
 
 **User Component**
@@ -46,126 +46,127 @@ Updated By: Nicole Carrero
 - Controllers:
   - AuthController:
     - The AuthController inherits from ApplicationBaseController.  It will make an API request and use the ApplicationIdentityUserManager, SignInManager, MembershipManager, EmailManager, OrganizationManager, AccessRequestsManager, and TermsConditionsManager to access the PersonRepository, PersonEmailRepository, EmailVerificationRepository, AuditLogRepository, and OrganizationMemberRepository to track user logins and add or edit users from the Server and will return that information back to the view.
+    - NOTE: The current API version is 1.
     - Routes:
-      - Login (create bearer token): [HttpPost("api/v1/auth/token")]
+      - Login (create bearer token): [HttpPost("api/v{apiVersion}/auth/token")]
         - Payloads
           - Input : Username, Password
           - Output : 200 OK response with Person information and Token
-      - Register: [HttpPost("api/v1/auth/register")]
+      - Register: [HttpPost("api/v{apiVersion}/auth/register")]
         - Payloads
           - Input : Signup view model (Name, Department, Email Address, Password)
           - Output : 200 OK response
-      - Edit Password: [HttpPut("api/v1/auth/changepassword")]
+      - Edit Password: [HttpPut("api/v{apiVersion}/auth/changepassword")]
         - Payloads
           - Input : Old Password, New Password, Confirm Password
           - Output : 200 OK response
-      - Verify Token: [HttpGet("api/v1/auth/verifyusertoken")]
+      - Verify Token: [HttpGet("api/v{apiVersion}/auth/verifyusertoken")]
         - Payloads
           - Input : User id, code
           - Output : Redirect to appropriate web url
-      - Set password: [HttpPut("api/v1/auth/setpassword")]
+      - Set password: [HttpPut("api/v{apiVersion}/auth/setpassword")]
         - Payloads
           - Input : User id, New password, Token
           - Output : 200 OK response
-      - Set user password: [HttpPut("api/v1/auth/setuserpassword")]
+      - Set user password: [HttpPut("api/v{apiVersion}/auth/setuserpassword")]
         - Payloads
           - Input : New password
           - Output : 200 OK response
-      - Confirm new user: [HttpGet("api/v1/auth/confirmemail")]
+      - Confirm new user: [HttpGet("api/v{apiVersion}/auth/confirmemail")]
         - Payloads
           - Input : User id, code
           - Output : Redirect to appropriate web url
-      - Forgot Password: [HttpPost("api/v1/auth/forgotpassword")]
+      - Forgot Password: [HttpPost("api/v{apiVersion}/auth/forgotpassword")]
         - Payloads
           - Input : Email address, Company
           - Output : 200 OK response
-      - Get user information: [HttpGet("api/v1/auth/getuserinfo")]
+      - Get user information: [HttpGet("api/v{apiVersion}/auth/getuserinfo")]
         - Payloads
           - Input : None
           - Output : JSON file listing authenticated user information
-      - Resend email confirmation: [HttpPut("api/v1/auth/resendemailconfirmation")]
+      - Resend email confirmation: [HttpPut("api/v{apiVersion}/auth/resendemailconfirmation")]
         - Payloads
           - Input : Email address
           - Output : 200 OK response
-      - Confirm email address: [HttpGet("api/v1/auth/confirmemailaddress")]
+      - Confirm email address: [HttpGet("api/v{apiVersion}/auth/confirmemailaddress")]
         - Payloads
           - Input : Email address, Token
           - Output : Redirect to appropriate web url
-      - Refresh token: [HttpPost("api/v1/auth/refresh")]
+      - Refresh token: [HttpPost("api/v{apiVersion}/auth/refresh")]
         - Payloads
           - Input : Token, Refresh Token
           - Output : New Bearer token and refresh token
     - OrganizationMembersController:
       - The OrganizationMembersController inherits from EntityController<OrganizationMember>.  It will make an API request to the MembershipManager, ApplicationIdentityUserManager, and AccessRequestsManager to access the PersonRepository to retrieve, add, or delete users in the organization from the Server and will return that information back to the view.
       - Routes
-        - Get people in organization: [HttpGet("api/v1/organizations/{organizationId}/organizationmembers/people")]
+        - Get people in organization: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/organizationmembers/people")]
           - Payloads
             - Input : Organization id
             - Output : JSON file listing all people in organization information
-        - Get organization members: [HttpGet("api/v1/organizations/{organizationId}/organizationmembers")]
+        - Get organization members: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/organizationmembers")]
           - Payloads
             - Input : Organization id
             - Output : JSON file listing all organization member information
-        - Get organization member for specific organization [HttpGet("api/v1/organizations/{organizationId}/organizationmembers/{id}")]
+        - Get organization member for specific organization [HttpGet("api/v{apiVersion}/organizations/{organizationId}/organizationmembers/{id}")]
           - Payloads
             - Input : Organization id
             - Output : JSON file listing all corresponding organization member information
-        - Add new member: [HttpPost("api/v1/organizations/{organizationId}/organizationmembers")]
+        - Add new member: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/organizationmembers")]
           - Payloads
             - Input : Organization id, OrganizationMember model
             - Output : JSON file listing new organization member information
-        - Edit organization member: [HttpPut("api/v1/organizations/{organizationId}/organizationmembers/{id}")]
+        - Edit organization member: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/organizationmembers/{id}")]
           - Payloads
             - Input : Organization id, Organization member id, OrganizationMember model
             - Output : JSON file listing updated organization member information
-        - Invite user as organization member: [HttpPost("api/v1/organizations/{organizationId}/organizationmembers/inviteuser")]
+        - Invite user as organization member: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/organizationmembers/inviteuser")]
           - Payoads
             - Input : Organization id, Name, Email, Password (optional), Skip email verification (optional)
             - Output : 200 OK response
-        - Delete user from organization: [HttpDelete("api/v1/organizations/{organizationId}/organizationmembers/{id}")]
+        - Delete user from organization: [HttpDelete("api/v{apiVersion}/organizations/{organizationId}/organizationmembers/{id}")]
           - Payloads
             - Input : Organization id, Organization member id
             - Output : 200 OK response
-        - Edit organization member property: [HttpPatch("api/v1/organizations/{organizationId}/organizationmembers/{id}")]
+        - Edit organization member property: [HttpPatch("api/v{apiVersion}/organizations/{organizationId}/organizationmembers/{id}")]
           - Payloads
-            - Input : Organization member id, JSONPatchDocument in request body with changes
+            - Input : Organization id, Organization member id, JSONPatchDocument in request body with changes
             - Output : 200 OK response
     - AccessRequestsController:
       - The AccessRequestsController inherits from EntityController<AccessRequest>.  It will make an API request to the MembershipManager, AccessRequestsManager, and ApplicationIdentityUserManager to access the AccessRequestRepository to retrieve, add, accept, or reject requests to join the organization from the Server and will return that information back to the view.
       - Routes
-        - All access requests: [HttpGet(api/v1/organizations/{organizationd}/accessrequests)]
+        - All access requests: [HttpGet(api/v{apiVersion}/organizations/{organizationd}/accessrequests)]
           - Payloads
             - Input : Organization id
             - Output : JSON file listing all access requests
-        - All pending requests: [HttpGet("api/v1/organizations/{organizationId}/accessrequests/pending")]
+        - All pending requests: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/accessrequests/pending")]
           - Payloads
             - Input : Organization id
             - Output : JSON file listing users with pending access to organization
-        - Get access request: [HttpGet("api/v1/organizations/{organizationId}/accessrequests/{id}")]
+        - Get access request: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/accessrequests/{id}")]
           - Payloads
             - Input : Organization id
             - Output : JSON file listing all access requests for a specific organization
-        - Add new request to organization: [HttpPost("api/v1/organizations/{organizationId}/accessrequests")]
+        - Add new request to organization: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/accessrequests")]
           - Payloads
             - Input : Organization id, AccessRequest model
             - Output : JSON file listing new access request information
-        - Edit access request: [HttpPut("api/v1/organizations/{organizationId}/accessrequests/{id}")]
+        - Edit access request: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/accessrequests/{id}")]
           - Payloads
             - Input : Organization id, Access request id, AccessRequest model
             - Output : JSON file listing updated access request information
-        - Approve request: [HttpPut("/apt/v1/organizations/{organizationId}/accessrequests/{id}/approve)"]
+        - Approve request: [HttpPut("/apt/v{apiVersion}/organizations/{organizationId}/accessrequests/{id}/approve)"]
           - Payloads
             - Input : Organization id, Access request id
             - Output : 200 OK response
-        - Reject request: [HttpPut("api/v1/organizations/{organizationId}/accessrequests/{id}/reject)"]
+        - Reject request: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/accessrequests/{id}/reject)"]
           - Payloads
             - Input : Organization id, Access request id
             - Output : 200 OK response
-        - Delete request: [HttpDelete("api/v1/organizations/{organizationId}/accessrequests/{id}")]
+        - Delete request: [HttpDelete("api/v{apiVersion}/organizations/{organizationId}/accessrequests/{id}")]
           - Payloads
             - Input : Access request id
             - Output : 200 OK response
-        - Edit request property: [HttpPatch("api/v1/organizations/{organizationId}/accessrequests/{id}")]
+        - Edit request property: [HttpPatch("api/v{apiVersion}/organizations/{organizationId}/accessrequests/{id}")]
           - Payloads 
             - Input : Access request id, JSONPatchDocument in request body with changes
             - Output : 200 OK response

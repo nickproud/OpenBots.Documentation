@@ -1,7 +1,7 @@
 Author: Nicole Carrero
 Creation Date: 8/19/2020
 
-Updated On: 11/30/2020
+Updated On: 3/18/2021
 Updated By: Nicole Carrero
 
 **System Configuration Component**
@@ -29,32 +29,33 @@ Updated By: Nicole Carrero
       - The user will be able to view and modify default configuration settings, such as enabling Swagger, maximum amount of records to export into a file, maximum amount of records to return on a page, file adapter, file storage path, file storage provider, and maximum amount of retries for processing a queue item.
   - Configuration Values Controller:
     - The ConfigurationValuesController will make an API request to access the ConfigurationValueRepository to modify the appporpiate settings.
+    - NOTE: The current API version is 1.
       - Routes:
-        - All configuration values: [HttpGet("api/v1/configurationvalues")]
+        - All configuration values: [HttpGet("api/v{apiVersion}/configurationvalues")]
           - Payloads
             - Input : None
             - Output : JSON file listing all configuration value information
-        - Configuration values count: [HttpGet("api/v1/configurationvalues/count")]
+        - Configuration values count: [HttpGet("api/v{apiVersion}/configurationvalues/count")]
           - Payloads
             - Input : None
             - Output : Count of all configuration values
-        - Configuration value details: [HttpGet("api/v1/configurationvalues/{id}")]
+        - Configuration value details: [HttpGet("api/v{apiVersion}/configurationvalues/{id}")]
           - Payloads
             - Input : Configuration value id
             - Output : JSON file listing specific configuration value details
-        - Add configuration value: [HttpPost("api/v1/configurationvalues")]
+        - Add configuration value: [HttpPost("api/v{apiVersion}/configurationvalues")]
           - Payloads
             - Input : Configuration value data model
             - Output : JSON file listing newly created configuration value details
-        - Edit configuration value: [HttpPut("api/v1/configurationvalues/{id}")]
+        - Edit configuration value: [HttpPut("api/v{apiVersion}/configurationvalues/{id}")]
           - Payloads
             - Input : Configuration value id, Configuration value data model
             - Output : JSON file listing updated configuration value details
-        - Edit configuration value property: [HttpPatch("api/v1/configurationvalues/{id}")]
+        - Edit configuration value property: [HttpPatch("api/v{apiVersion}/configurationvalues/{id}")]
           - Payloads
             - Input : Configuration value id, JSONPatchDocument in request body
             - Output : 200 OK response
-        - Delete configuration value: [HttpDelete("api/v1/configurationvalues/{id}")]
+        - Delete configuration value: [HttpDelete("api/v{apiVersion}/configurationvalues/{id}")]
           - Payloads
             - Input : Configuration value id
             - Output : 200 OK response

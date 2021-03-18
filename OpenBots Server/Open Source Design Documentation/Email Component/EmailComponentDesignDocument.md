@@ -1,7 +1,7 @@
 Author: Nicole Carrero
 Creation Date: 12/4/2020
 
-Updated On: 3/8/2021
+Updated On: 3/18/2021
 Updated By: Nicole Carrero
 
 **Email Component**
@@ -48,167 +48,168 @@ Updated By: Nicole Carrero
             - The user can edit a draft email, where files can be uploaded to overwrite the old ones.
             - The user can delete draft emails.
 - Controllers:
+  - NOTE: The current API version is 1.
   - Email Accounts Controller:
     - The EmailAccountsController will make an API request to access the EmailAccountsRepository in order to retrieve, add, edit, or delete the appropriate email account.
     - Routes:
-      - All email accounts: [HttpGet("api/v1/emailaccounts")]
+      - All email accounts: [HttpGet("api/v{apiVersion}/emailaccounts")]
         - Payloads
           - Input : None
           - Output : JSON file listing all existing email account information
-      - Email account count: [HttpGet("api/v1/emailaccounts/count")]
+      - Email account count: [HttpGet("api/v{apiVersion}/emailaccounts/count")]
         - Payloads
           - Input : None
           - Output : Count of all email accounts
-      - Email account details: [HttpGet("api/v1/emailaccounts/{id}")]
+      - Email account details: [HttpGet("api/v{apiVersion}/emailaccounts/{id}")]
         - Payloads
           - Input : Email account id
           - Output : JSON file listing specific email account information
-      - Add email account: [HttpPost("api/v1/emailaccounts")]
+      - Add email account: [HttpPost("api/v{apiVersion}/emailaccounts")]
         - Payloads
           - Input : Email account data model
           - Output : JSON file listing newly created email account information
-      - Edit email account: [HttpPut("api/v1/emailaccount/{id}")]
+      - Edit email account: [HttpPut("api/v{apiVersion}/emailaccount/{id}")]
         - Payloads
           - Input : Email account id, Email account data model
           - Output : JSON file listing updated email account information
-      - Edit email account property: [HttpPatch("api/v1/emailaccounts/{id}")]
+      - Edit email account property: [HttpPatch("api/v{apiVersion}/emailaccounts/{id}")]
         - Payloads
           - Input : Email account id, JSONPatchDocument in request body with changes
           - Output : 200 OK response
-      - Delete email account: [HttpDelete("api/v1/emailaccounts/{id}")]
+      - Delete email account: [HttpDelete("api/v{apiVersion}/emailaccounts/{id}")]
         - Payloads
           - Input : Email account id
           - Output : 200 OK response
-      - Email account lookup: [HttpGet("api/v1/emailaccounts/lookup")]
+      - Email account lookup: [HttpGet("api/v{apiVersion}/emailaccounts/lookup")]
         - Payloads
           - Input : None
           - Output : JSON file listing all email account ids and names
   - Email Settings Controller:
     - The EmailSettingsController will make an API request to access the EmailSettingsRepository in order to retrieve, add, edit, or delete the appropriate email settings.
     - Routes:
-      - All email settings (will only have one by default): [HttpGet("api/v1/emailsettings")]
+      - All email settings (will only have one by default): [HttpGet("api/v{apiVersion}/emailsettings")]
         - Payloads
           - Input : None
           - Output : JSON file listing email settings information
-      - Email settings count: [HttpGet("api/v1/emailsettings/count")]
+      - Email settings count: [HttpGet("api/v{apiVersion}/emailsettings/count")]
         - Payloads
           - Input : None
           - Output : Count of all email settings entities (should only return one)
-      - Email settings details: [HttpGet("api/v1/emailsettings/{id}")]
+      - Email settings details: [HttpGet("api/v{apiVersion}/emailsettings/{id}")]
         - Payloads
           - Input : Email settings id
           - Output : JSON file listing specific email settings information
-      - Add email settings (if one doesn't already exist): [HttpPost("api/v1/emailsettings")]
+      - Add email settings (if one doesn't already exist): [HttpPost("api/v{apiVersion}/emailsettings")]
         - Payloads
           - Input : Email settings data model
           - Output : JSON file listing newly created email settings
-      - Edit email settings: [HttpPut("api/v1/emailsettings/{id}")]
+      - Edit email settings: [HttpPut("api/v{apiVersion}/emailsettings/{id}")]
         - Payloads
           - Input : Email settings id, Email settings data model
           - Output : JSON file listing updated email settings information
-      - Edit email settings property: [HttpPatch("api/v1/emailsettings/{id}")]
+      - Edit email settings property: [HttpPatch("api/v{apiVersion}/emailsettings/{id}")]
         - Payloads
           - Input : Email settings id, JSONPatchDocument in request body
           - Output : 200 OK response
-      - Delete email settings: [HttpDelete("api/v1/emailsettings/{id}")]
+      - Delete email settings: [HttpDelete("api/v{apiVersion}/emailsettings/{id}")]
         - Payloads
           - Input : Email settings id
           - Output : 200 OK response
   - Emails Controller:
     - The EmailsController will make an API request to access the EmailRepository in order to retrieve, add, edit, or delete the appropriate emails.
     - Routes:
-      - All emails (view model): [HttpGet("api/v1/emails")]
+      - All emails (view model): [HttpGet("api/v{apiVersion}/emails")]
         - Payloads
           - Input : None
           - Output : JSON file listing all email view model information
-      - Email count: [HttpGet("api/v1/emails/count")]
+      - Email count: [HttpGet("api/v{apiVersion}/emails/count")]
         - Payloads
           - Input : None
           - Output : Count of all emails
-      - Email details: [HttpGet("api/v1/emails/{id}")]
+      - Email details: [HttpGet("api/v{apiVersion}/emails/{id}")]
         - Payloads
           - Input : Email id
           - Output : JSON file listing specific email information
-      - Email details (view model): [HttpGet("api/v1/email/{id}/view")]
+      - Email details (view model): [HttpGet("api/v{apiVersion}/email/{id}/view")]
         - Payloads
           - Input : Email id
           - Output : JSON file listing specific email view model information
-      - Add email (draft): [HttpPost("api/v1/emails")]
+      - Add email (draft): [HttpPost("api/v{apiVersion}/emails")]
         - Payloads
           - Input : Add email view model (direction, all other properties are optional)
           - Output : JSON file listing newly created email draft information
-      - Send email draft (update and send existing email): [HttpPut("api/v1/emails/{id}/send")]
+      - Send email draft (update and send existing email): [HttpPut("api/v{apiVersion}/emails/{id}/send")]
         - Payloads
           - Input : Email id, SendEmailViewModel data (anything missing from draft that needs to be included) Email account name (as optional query parameter)
           - Output : JSON file listing updated email view model information
-      - Send new email: [HttpPost("api/v1/emails/send")]
+      - Send new email: [HttpPost("api/v{apiVersion}/emails/send")]
         - Payloads
           - Input : SendEmailViewModel data (drive name is optional), Email account name (as optional query parameter)
           - Output : JSON file listing newly created email view model information
-      - Edit email: [HttpPut("api/v1/emails/{id}")]
+      - Edit email: [HttpPut("api/v{apiVersion}/emails/{id}")]
         - Payloads
           - Input : Email id, Email data model
           - Output : JSON file listing updated email information
-      - Edit email with file(s): [HttpPut("api/v1/emails/{id}/update")]
+      - Edit email with file(s): [HttpPut("api/v{apiVersion}/emails/{id}/update")]
         - Payloads
           - Input : Email id, UpdateEmailViewModel data (drive name is optional)
           - Output : JSON file listing updated email view model information
-      - Edit email property: [HttpPatch("api/v1/emails/{id}")]
+      - Edit email property: [HttpPatch("api/v{apiVersion}/emails/{id}")]
         - Payloads
           - Input : Email id, JSONPatchDocument in request body
           - Output : 200 OK response
-      - Delete email: [HttpDelete("api/v1/emails/{id}")]
+      - Delete email: [HttpDelete("api/v{apiVersion}/emails/{id}")]
         - Payloads
           - Input : Email id, drive name (optional)
           - Output : 200 OK response
   - Email Attachments Controller:
     - The EmailAttachmentsController will make an API request to access the EmailAttachmentRepository in order to retrieve, add, edit, or delete the appropriate email attachments.
     - Routes:
-      - All email attachments: [HttpGet("api/v1/emails/{emailId}/emailattachments")]
+      - All email attachments: [HttpGet("api/v{apiVersion}/emails/{emailId}/emailattachments")]
         - Payloads
           - Input : Email id
           - Output : JSON file listing all email attachment information
-      - All email attachments view: [HttpGet("api/v1/emails/{emailId}/emailattachments")]
+      - All email attachments view: [HttpGet("api/v{apiVersion}/emails/{emailId}/emailattachments")]
         - Payloads
           - Input : Email id
           - Output : JSON file listing all email attachment view information
-      - Email attachment count: [HttpGet("api/v1/emails/{emailId}/emailattachments/count")]
+      - Email attachment count: [HttpGet("api/v{apiVersion}/emails/{emailId}/emailattachments/count")]
         - Payloads
           - Input : Email id
           - Output : Count of all email attachments
-      - Email attachment details: [HttpGet("api/v1/emails/{emailId}/emailattachments/{id}")]
+      - Email attachment details: [HttpGet("api/v{apiVersion}/emails/{emailId}/emailattachments/{id}")]
         - Payloads
           - Input : Email id, attachment id
           - Output : JSON file listing specific email attachment  information
-      - Add email attachment(s) (using existing Server files): [HttpPost("api/v1/emails/{emailId}/emailattachments/{id}")]
+      - Add email attachment(s) (using existing Server files): [HttpPost("api/v{apiVersion}/emails/{emailId}/emailattachments/{id}")]
         - Payloads
           - Input : Email id, attachment id, file id(s) list, optional query parameter ("?driveName={driveName}")
           - Output : JSON file listing newly created email attachment(s) information
-      - Add email attachment(s) (upload new file(s)) [HttpPost("api/v1/emails/{emailId}/emailattachments")]
+      - Add email attachment(s) (upload new file(s)) [HttpPost("api/v{apiVersion}/emails/{emailId}/emailattachments")]
         - Payloads
           - Input : Email id, file(s), optional query parameter ("?driveName={driveName}")
           - Output : JSON file listing newly created email attachment(s)
-      - Edit email attachment: [HttpPut("api/v1/emails/{emailId}/emailattachments/{id}")]
+      - Edit email attachment: [HttpPut("api/v{apiVersion}/emails/{emailId}/emailattachments/{id}")]
         - Payloads
           - Input : Email id, attachment id, attachment data model
           - Output : 200 Ok response
-      - Edit email attachment (with file): [HttpPut("api/v1/emails/{emailId}/emailattachments/{id}/update")]
+      - Edit email attachment (with file): [HttpPut("api/v{apiVersion}/emails/{emailId}/emailattachments/{id}/update")]
         - Payloads
           - Input : Email id, attachment id, UpdateEmailAttachmentViewModel view model (drive name is optional)
           - Output : JSON file listing updated email attachment information
-      - Edit email attachment property: [HttpPatch("api/v1/emails/{emailId}/emailattachments/{id}")]
+      - Edit email attachment property: [HttpPatch("api/v{apiVersion}/emails/{emailId}/emailattachments/{id}")]
         - Payloads
           - Input : Email id, attachment id, JSONPatchDocument in request body
           - Output : 200 Ok response
-      - Delete all email attachments: [HttpDelete("api/v1/emails/{emailId}/emailattachments")]
+      - Delete all email attachments: [HttpDelete("api/v{apiVersion}/emails/{emailId}/emailattachments")]
         - Payloads
           - Input : Email id, optional query parameter ("?driveName={driveName}")
           - Output : 200 Ok response
-      - Delete email attachment: [HttpDelete("api/v1/emails/{emailId}/emailattachments/{id}")]
+      - Delete email attachment: [HttpDelete("api/v{apiVersion}/emails/{emailId}/emailattachments/{id}")]
         - Payloads
           - Input : Email id, attachment id, optional query parameter ("?driveName={driveName}")
           - Output : 200 Ok response
-      - Export email attachment: [HttpGet("api/v1/emails/{emailId}/emailattachments/{id}/export")]
+      - Export email attachment: [HttpGet("api/v{apiVersion}/emails/{emailId}/emailattachments/{id}/export")]
         - Payloads
           - Input : Email id, attachment id, optional query parameter ("?driveName={driveName}")
           - Output : Email attachment file

@@ -1,7 +1,7 @@
 Author: Nicole Carrero
 Creation Date: 8/20/2020
 
-Updated On: 10/16/2020
+Updated On: 3/18/2021
 Updated By: Nicole Carrero
 
 **Role Component**
@@ -30,12 +30,13 @@ Updated By: Nicole Carrero
       - In the table of team members, administrators will have the option to grant users administrative rights or remove them.
   - MembershipController:
     - The MembershipController inherits from EntityController<Organization>.  It will make an API request and use the MembershipManager to access the OrganizationMemberRepository to update admin rights to the Server and will return that information back to the view.
+    - NOTE: The current API version is 1.
     - Routes:
-      - Grant administrator permission: [HttpPut("/api​/v1​/People​/{personId}​/Organizations​/{id}​/GrantAdmin")]
+      - Grant administrator permission: [HttpPut("/api​/v{apiVersion}​/People​/{personId}​/Organizations​/{id}​/GrantAdmin")]
         - Payloads
           - Input : Person id, Organization id, IsAdministrator = true
           - Output : 200 OK response
-      - Revoke administrator permission: [HttpPut("/api/v1/People/{personId}/Organizations/{id}/RevokeAdmin")]
+      - Revoke administrator permission: [HttpPut("/api/v{apiVersion}/People/{personId}/Organizations/{id}/RevokeAdmin")]
         - Payloads
           - Input : Person id, Organization id, IsAdministrator = false
           - Output : 200 OK response

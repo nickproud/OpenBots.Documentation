@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "519aab2c-5610-408d-b4b6-094879482356",
-		"name": "File Component - Local File Storage (Open Source)",
+		"_postman_id": "32fb7039-2a57-42a3-8a87-ac2f37d36c7d",
+		"name": "File Component - Local File Storage (Cloud)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -33,9 +33,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{localhost}}files?$top=5&$skip=5",
+					"raw": "{{localcloudhost}}files?$top=5&$skip=0",
 					"host": [
-						"{{localhost}}files"
+						"{{localcloudhost}}files"
 					],
 					"query": [
 						{
@@ -54,7 +54,7 @@
 						},
 						{
 							"key": "$skip",
-							"value": "5"
+							"value": "0"
 						}
 					]
 				}
@@ -89,9 +89,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{localhost}}files?file=false",
+					"raw": "{{localcloudhost}}files?file=false",
 					"host": [
-						"{{localhost}}files"
+						"{{localcloudhost}}files"
 					],
 					"query": [
 						{
@@ -136,18 +136,9 @@
 					}
 				},
 				"url": {
-					"raw": "https://dev.server.openbots.io/api/v1/files",
-					"protocol": "https",
+					"raw": "{{localcloudhost}}files?$orderby=createdOn+desc&$top=5&$skip=0&$filter=ParentId+eq+guid'37a01356-7514-47a2-96ce-986faadd628e'",
 					"host": [
-						"dev",
-						"server",
-						"openbots",
-						"io"
-					],
-					"path": [
-						"api",
-						"v1",
-						"files"
+						"{{localcloudhost}}files"
 					],
 					"query": [
 						{
@@ -157,23 +148,19 @@
 						},
 						{
 							"key": "$orderby",
-							"value": "createdOn+desc",
-							"disabled": true
+							"value": "createdOn+desc"
 						},
 						{
 							"key": "$top",
-							"value": "5",
-							"disabled": true
+							"value": "5"
 						},
 						{
 							"key": "$skip",
-							"value": "0",
-							"disabled": true
+							"value": "0"
 						},
 						{
 							"key": "$filter",
-							"value": "ParentId+eq+guid'37a01356-7514-47a2-96ce-986faadd628e'",
-							"disabled": true
+							"value": "ParentId+eq+guid'37a01356-7514-47a2-96ce-986faadd628e'"
 						}
 					]
 				}
@@ -208,9 +195,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{localhost}}files?$filter=ParentId eq guid'8cb534ee-8a7c-4f3e-8161-7b4cfae6e525'",
+					"raw": "{{localcloudhost}}files?$filter=ParentId eq guid'8cb534ee-8a7c-4f3e-8161-7b4cfae6e525'",
 					"host": [
-						"{{localhost}}files"
+						"{{localcloudhost}}files"
 					],
 					"query": [
 						{
@@ -238,9 +225,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{localhost}}files/count",
+					"raw": "{{localcloudhost}}files/count",
 					"host": [
-						"{{localhost}}files"
+						"{{localcloudhost}}files"
 					],
 					"path": [
 						"count"
@@ -272,9 +259,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{localhost}}files/count/folder",
+					"raw": "{{localcloudhost}}files/count/folder",
 					"host": [
-						"{{localhost}}files"
+						"{{localcloudhost}}files"
 					],
 					"path": [
 						"count",
@@ -307,12 +294,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{localhost}}files/4ad4e87a-61a5-49cc-ae84-421d05309f03",
+					"raw": "{{localcloudhost}}files/e5981bba-dbbf-469f-b2de-5f30f8a3e517",
 					"host": [
-						"{{localhost}}files"
+						"{{localcloudhost}}files"
 					],
 					"path": [
-						"4ad4e87a-61a5-49cc-ae84-421d05309f03"
+						"e5981bba-dbbf-469f-b2de-5f30f8a3e517"
 					],
 					"query": [
 						{
@@ -341,9 +328,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{localhost}}files/drive",
+					"raw": "{{localcloudhost}}files/drive",
 					"host": [
-						"{{localhost}}files"
+						"{{localcloudhost}}files"
 					],
 					"path": [
 						"drive"
@@ -379,26 +366,25 @@
 					"formdata": [
 						{
 							"key": "StoragePath",
-							"value": "Files\\Parent\\Child",
+							"value": "Files\\Parent",
 							"type": "text"
 						},
 						{
 							"key": "Files",
 							"type": "file",
-							"src": "/C:/Users/NicoleCarrero/OneDrive - OpenBots Inc/OpenBots/LinkedIn/Digital Transformation Byte Size Interview Subtitle Notes - Ashish.docx"
+							"src": "/C:/Users/NicoleCarrero/OneDrive - OpenBots Inc/OpenBots/API Changes/Email.EmailAttachment API Changes/Add Attachment - New Files.PNG"
 						},
 						{
 							"key": "Files",
 							"type": "file",
-							"src": [],
-							"disabled": true
+							"src": "/C:/Users/NicoleCarrero/OneDrive - OpenBots Inc/OpenBots/API Changes/Email.EmailAttachment API Changes/Add Email - Draft.PNG"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{localhost}}files",
+					"raw": "{{localcloudhost}}files",
 					"host": [
-						"{{localhost}}files"
+						"{{localcloudhost}}files"
 					],
 					"query": [
 						{
@@ -431,12 +417,12 @@
 					"formdata": [
 						{
 							"key": "Name",
-							"value": "Child",
+							"value": "Parent3",
 							"type": "text"
 						},
 						{
 							"key": "StoragePath",
-							"value": "Files\\Parent",
+							"value": "Files",
 							"type": "text"
 						},
 						{
@@ -447,9 +433,9 @@
 					]
 				},
 				"url": {
-					"raw": "{{localhost}}files",
+					"raw": "{{localcloudhost}}files",
 					"host": [
-						"{{localhost}}files"
+						"{{localcloudhost}}files"
 					],
 					"query": [
 						{
@@ -478,12 +464,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{localhost}}files/fd0515a7-e4a9-4a96-9d51-661f74f90ace/download",
+					"raw": "{{localcloudhost}}files/ef15e4da-09c6-474b-abad-53b7d8d62b4c/download",
 					"host": [
-						"{{localhost}}files"
+						"{{localcloudhost}}files"
 					],
 					"path": [
-						"fd0515a7-e4a9-4a96-9d51-661f74f90ace",
+						"ef15e4da-09c6-474b-abad-53b7d8d62b4c",
 						"download"
 					]
 				}
@@ -506,12 +492,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{localhost}}files/aaf4eafb-f833-4109-b3e6-ce8fb324926a",
+					"raw": "{{localcloudhost}}files/ef15e4da-09c6-474b-abad-53b7d8d62b4c",
 					"host": [
-						"{{localhost}}files"
+						"{{localcloudhost}}files"
 					],
 					"path": [
-						"aaf4eafb-f833-4109-b3e6-ce8fb324926a"
+						"ef15e4da-09c6-474b-abad-53b7d8d62b4c"
 					],
 					"query": [
 						{
@@ -549,12 +535,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{localhost}}files/dd4834f4-e093-45b1-94ca-dc93546804d2/rename",
+					"raw": "{{localcloudhost}}files/f05cd01b-2999-4086-9f56-ed7e04c514e2/rename",
 					"host": [
-						"{{localhost}}files"
+						"{{localcloudhost}}files"
 					],
 					"path": [
-						"dd4834f4-e093-45b1-94ca-dc93546804d2",
+						"f05cd01b-2999-4086-9f56-ed7e04c514e2",
 						"rename"
 					],
 					"query": [
@@ -584,14 +570,14 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "{{localhost}}files/3e585944-8dd9-4ee0-8112-21849c64f628/move/9710e6b7-ec17-461f-a718-93fe5d5aeb15",
+					"raw": "{{localcloudhost}}files/30d94f31-e5d2-4313-8d7c-601ddabee157/move/1a840422-0d47-4b6e-98bf-73551525d021",
 					"host": [
-						"{{localhost}}files"
+						"{{localcloudhost}}files"
 					],
 					"path": [
-						"3e585944-8dd9-4ee0-8112-21849c64f628",
+						"30d94f31-e5d2-4313-8d7c-601ddabee157",
 						"move",
-						"9710e6b7-ec17-461f-a718-93fe5d5aeb15"
+						"1a840422-0d47-4b6e-98bf-73551525d021"
 					],
 					"query": [
 						{
@@ -620,14 +606,14 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{localhost}}files/9710e6b7-ec17-461f-a718-93fe5d5aeb15/copy/1d0c1a59-19a9-44cf-9183-6283df72cdd4",
+					"raw": "{{localcloudhost}}files/1a840422-0d47-4b6e-98bf-73551525d021/copy/f05cd01b-2999-4086-9f56-ed7e04c514e2",
 					"host": [
-						"{{localhost}}files"
+						"{{localcloudhost}}files"
 					],
 					"path": [
-						"9710e6b7-ec17-461f-a718-93fe5d5aeb15",
+						"1a840422-0d47-4b6e-98bf-73551525d021",
 						"copy",
-						"1d0c1a59-19a9-44cf-9183-6283df72cdd4"
+						"f05cd01b-2999-4086-9f56-ed7e04c514e2"
 					],
 					"query": [
 						{
@@ -655,20 +641,32 @@
 				},
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fileStorageAdapterType\": \"LocalFileStorage\",\r\n    \"storagePath\": \"NewFiles\",\r\n    \"name\": \"NewFiles\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files/drive",
+					"raw": "{{localcloudhost}}files/drive",
 					"host": [
-						"{{localhost}}organizations"
+						"{{localcloudhost}}files"
 					],
 					"path": [
-						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
-						"files",
 						"drive"
 					],
 					"query": [
 						{
 							"key": "driveName",
 							"value": "New Files",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
 							"disabled": true
 						}
 					]
@@ -692,9 +690,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{localhost}}files/driveNames?adapterType=LocalFileStorage",
+					"raw": "{{localcloudhost}}files/driveNames?adapterType=LocalFileStorage",
 					"host": [
-						"{{localhost}}files"
+						"{{localcloudhost}}files"
 					],
 					"path": [
 						"driveNames"

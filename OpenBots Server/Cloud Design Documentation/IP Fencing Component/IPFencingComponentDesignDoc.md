@@ -1,7 +1,7 @@
 Author: Dairon Hernandez
 Creation Date: 11/25/2020
 
-Updated On: 12/21/2020
+Updated On: 3/18/2021
 Updated By: Nicole Carrero
 
 **IPFencing Component**
@@ -33,29 +33,31 @@ Updated By: Nicole Carrero
         - Rules may contain specific IPV4/IPV6 addresses, IPV4/IPV6 ranges, or Header/Header value pairs
   - IPFencingController:
     - The IPFencing controller will be responsible for performing the necessary CRUD operations on the IPFencing table. 
+    - NOTE: The current API version is 1.
+    - Routes:
       - All IPFencing: [HttpGet("api/apiVersion/IPFencing")]
         - Payloads
           - Input : None
           - Output : JSON file contataining all IPFencing rules for the specified Organization
       - Individual IPFencing details: [HttpGet("api/apiVersion/Organizations/{organizationId}/IPFencing/{id}")]
         - Payloads
-          - Input : IPFencing id
+          - Input : Organization id, IP fencing id
           - Output : JSON file of all individual IPFencing information for the specified Organization
       - Create an IPFencing: [HttpPost("api/apiVersion/Organizations/{organizationId}/IPFencing")]
         - Payloads
-          - Input : CreateIPFencingViewModel 
+          - Input : Organization id, CreateIPFencingViewModel data
           - Output : JSON file listing new IPFencing information
       - Edit IPFencing: [HttpPut("api/apiVersion/Organizations/{organizationId}/IPFencing/{id}")]
         - Payloads
-          - Input : IPFencing model
+          - Input : Organization id, IP fencing model data
           - Output : JSON file listing updated IPFencing information
       - Delete IPFencing: [HttpDelete("api/apiVersion/Organizations/{organizationId}/IPFencing/{id}")]
         - Payloads
-          - Input : IPFencing id
+          - Input : Organization id, IP fencing id
           - Output : 200 OK response
       - Edit IPFencing property: [HttpPatch("api/apiVersion/Organizations/{organizationId}/IPFencing/{id}")]
         - Payloads
-          - Input : IPFencing id, and JsonPatchDocument in request body with changes
+          - Input : Organization id, IP fencing id, JsonPatchDocument in request body with changes
           - Output : 200 OK response
   - IPFencing Manager:
     - The IPFencingManager will inherit BaseManager, which inherits IManager, and IIPFencingManager.

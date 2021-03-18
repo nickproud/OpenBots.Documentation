@@ -1,7 +1,7 @@
 Author: Nicole Carrero
 Creation Date: 8/20/2020
 
-Updated On: 10/15/2020
+Updated On: 3/18/2021
 Updated By: Nicole Carrero
 
 **Automation Execution Log Component**
@@ -38,47 +38,48 @@ Updated By: Nicole Carrero
   - AutomationExecutionLogsController:
     - The AutomationExecutionLogsController will make an API request and use the AutomationExecutionLogManager to access the AutomationExecutionLogRepository to retrieve all the automation execution logs of a specific job from the Server and will return that information back to the view.  The controller will utilize this same structure to export the list of logs to a file or retrieve individual automation execution log details.
     - Routes:
-      - All automation execution logs for triggered job: [HttpGet("api/v1/automationexecutionlogs]
+    - NOTE: The current API version is 1.
+      - All automation execution logs for triggered job: [HttpGet("api/v{apiVersion}/automationexecutionlogs]
         - Payloads
           - Input : None
           - Output : JSON file listing automation execution logs
-      - All automation execution logs for triggered job (view model): [HttpGet("api/v1/automationexecutionlogs/view")]
+      - All automation execution logs for triggered job (view model): [HttpGet("api/v{apiVersion}/automationexecutionlogs/view")]
         - Payloads
           - Input : None
           - Output : JSON file listing automation execution logs
-      - Count of automation execution logs: [HttpGet("api/v1/automationexecutionlogs/count")]
+      - Count of automation execution logs: [HttpGet("api/v{apiVersion}/automationexecutionlogs/count")]
         - Payloads
           - Input : None
           - Output : Count of all automation execution logs for a triggered job
-      - Get automation execution log details for triggered job: [HttpGet("api/v1/automationexecutionlogs/{id}")]
+      - Get automation execution log details for triggered job: [HttpGet("api/v{apiVersion}/automationexecutionlogs/{id}")]
         - Payloads
           - Input : Job id
           - Output : JSON file listing the automation execution log details for a specific job
-      - Get automation execution log details for triggered job (view model): [HttpGet("api/v1/automationexecutionlogs/view/{id}")]
+      - Get automation execution log details for triggered job (view model): [HttpGet("api/v{apiVersion}/automationexecutionlogs/view/{id}")]
         - Payloads
           - Input : Job id
           - Output : JSON file listing the automation execution log details for a specific job
-      - Add a automation execution log for a job: [HttpPost("api/v1/automationexecutionlogs]
+      - Add a automation execution log for a job: [HttpPost("api/v{apiVersion}/automationexecutionlogs]
         - Payloads
           - Input : AutomationExecutionLog data model
           - Output : JSON file with the created log
-      - Add automation execution log for a started job: [HttpPost("api/v1/automationexecutionlogs/startautomation]
+      - Add automation execution log for a started job: [HttpPost("api/v{apiVersion}/automationexecutionlogs/startautomation]
         - Payloads
           - Input : AutomationExecutionLog data model
           - Output : JSON file with the created log
-      - Edit automation execution log for a triggered job: [HttpPut("api/v1/automationexecutionlogs/{id}]
+      - Edit automation execution log for a triggered job: [HttpPut("api/v{apiVersion}/automationexecutionlogs/{id}]
         - Payloads
           - Input : AutomationExecutionLog data model
           - Output : JSON file with updated values
-       - Edit automation execution log for a completed job: [HttpPut("api/v1/automationexecutionlogs/{id}/endautomation]
+       - Edit automation execution log for a completed job: [HttpPut("api/v{apiVersion}/automationexecutionlogs/{id}/endautomation]
         - Payloads
           - Input : AutomationExecutionLog data model
           - Output : JSON file with updated values
-       - Delete automation execution log: [HttpDelete("api/v1/automationexecutionlogs/{id}")]
+       - Delete automation execution log: [HttpDelete("api/v{apiVersion}/automationexecutionlogs/{id}")]
          - Payloads
            - Input : Automation execution log id
            - Output : 200 OK response
-       - Edit automation execution log property: [HttpPatch("api/v1/automationexecutionlogs/{id}")]
+       - Edit automation execution log property: [HttpPatch("api/v{apiVersion}/automationexecutionlogs/{id}")]
          - Payloads
            - Input : Automation execution log id
            - Output : 200 OK response

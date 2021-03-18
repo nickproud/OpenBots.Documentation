@@ -1,7 +1,7 @@
 Author: Dairon Hernandez
 Creation Date: 11/25/2020
 
-Updated On: 12/21/2020
+Updated On: 3/18/2021
 Updated By: Nicole Carrero
 
 **IPFencing Component**
@@ -32,28 +32,29 @@ Updated By: Nicole Carrero
     - Once an IPFencing mode has been selected, it becomes possible to add new rules to the IPFencing table.
         - Rules may contain specific IPV4/IPV6 addresses, IPV4/IPV6 ranges, or Header/Header value pairs
   - IPFencingController:
-    - The IPFencing controller will be responsible for performing the necessary CRUD operations on the IPFencing table. 
-      - All IPFencing: [HttpGet("api/apiVersion/IPFencing")]
+    - The IPFencing controller will be responsible for performing the necessary CRUD operations on the IPFencing table.
+    - NOTE: The current API version is 1.
+      - All IPFencing: [HttpGet("api/v{apiVersion}/IPFencing")]
         - Payloads
           - Input : None
           - Output : JSON file contataining all IPFencing rules for the specified Organization
-      - Individual IPFencing details: [HttpGet("api/apiVersion/Organizations/{organizationId}/IPFencing/{id}")]
+      - Individual IPFencing details: [HttpGet("api/v{apiVersion}/Organizations/{organizationId}/IPFencing/{id}")]
         - Payloads
           - Input : IPFencing id
           - Output : JSON file of all individual IPFencing information for the specified Organization
-      - Create an IPFencing: [HttpPost("api/apiVersion/Organizations/{organizationId}/IPFencing")]
+      - Create an IPFencing: [HttpPost("api/v{apiVersion}/Organizations/{organizationId}/IPFencing")]
         - Payloads
           - Input : CreateIPFencingViewModel 
           - Output : JSON file listing new IPFencing information
-      - Edit IPFencing: [HttpPut("api/apiVersion/Organizations/{organizationId}/IPFencing/{id}")]
+      - Edit IPFencing: [HttpPut("api/v{apiVersion}/Organizations/{organizationId}/IPFencing/{id}")]
         - Payloads
           - Input : IPFencing model
           - Output : JSON file listing updated IPFencing information
-      - Delete IPFencing: [HttpDelete("api/apiVersion/Organizations/{organizationId}/IPFencing/{id}")]
+      - Delete IPFencing: [HttpDelete("api/v{apiVersion}/Organizations/{organizationId}/IPFencing/{id}")]
         - Payloads
           - Input : IPFencing id
           - Output : 200 OK response
-      - Edit IPFencing property: [HttpPatch("api/apiVersion/Organizations/{organizationId}/IPFencing/{id}")]
+      - Edit IPFencing property: [HttpPatch("api/v{apiVersion}/Organizations/{organizationId}/IPFencing/{id}")]
         - Payloads
           - Input : IPFencing id, and JsonPatchDocument in request body with changes
           - Output : 200 OK response

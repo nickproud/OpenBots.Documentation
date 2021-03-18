@@ -1,0 +1,744 @@
+{
+	"info": {
+		"_postman_id": "d2b9de03-1e85-4272-90e6-9bdba13f92fc",
+		"name": "File Component - Azure Blob Storage",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All Files",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files?$top=5&$skip=0&driveName=Azure",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files"
+					],
+					"query": [
+						{
+							"key": "file",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "$top",
+							"value": "5"
+						},
+						{
+							"key": "$skip",
+							"value": "0"
+						},
+						{
+							"key": "driveName",
+							"value": "Azure"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Folders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files?file=false&driveName=Azure",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files"
+					],
+					"query": [
+						{
+							"key": "file",
+							"value": "false"
+						},
+						{
+							"key": "driveName",
+							"value": "Azure"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Files & Folders With ParentId Filter (All Child Files & Folders)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files?driveName=Azure&$filter=ParentId eq guid'3d326501-814f-4088-9d47-71e5b9011c38'",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files"
+					],
+					"query": [
+						{
+							"key": "driveName",
+							"value": "Azure"
+						},
+						{
+							"key": "$filter",
+							"value": "ParentId eq guid'3d326501-814f-4088-9d47-71e5b9011c38'"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Files Count",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files/count?driveName=Azure",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files",
+						"count"
+					],
+					"query": [
+						{
+							"key": "driveName",
+							"value": "Azure"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Folders Count",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files/count/folder?driveName=Azure",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files",
+						"count",
+						"folder"
+					],
+					"query": [
+						{
+							"key": "driveName",
+							"value": "Azure"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Folder/File Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files/5f8c1ee5-4e67-49ba-8b1d-0328a8c76c38?driveName=Azure",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files",
+						"5f8c1ee5-4e67-49ba-8b1d-0328a8c76c38"
+					],
+					"query": [
+						{
+							"key": "driveName",
+							"value": "Azure"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Drive Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files/drive?driveName=Azure",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files",
+						"drive"
+					],
+					"query": [
+						{
+							"key": "driveName",
+							"value": "Azure"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Files",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "ParentId",
+							"value": "b48d0c16-a09e-43a1-869a-900d8f77c0ff",
+							"type": "text"
+						},
+						{
+							"key": "Files",
+							"type": "file",
+							"src": "/C:/Users/NicoleCarrero/OneDrive - OpenBots Inc/OpenBots/API Changes/Automation API Changes/Add Automation.PNG"
+						},
+						{
+							"key": "Files",
+							"type": "file",
+							"src": "/C:/Users/NicoleCarrero/OneDrive - OpenBots Inc/OpenBots/API Changes/Automation API Changes/Delete Automation.PNG"
+						},
+						{
+							"key": "Files",
+							"type": "file",
+							"src": "/C:/Users/NicoleCarrero/OneDrive - OpenBots Inc/OpenBots/API Changes/Automation API Changes/Export Automation.PNG"
+						},
+						{
+							"key": "Files",
+							"type": "file",
+							"src": "/C:/Users/NicoleCarrero/OneDrive - OpenBots Inc/OpenBots/API Changes/Automation API Changes/Update Automation with File.PNG"
+						},
+						{
+							"key": "Files",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files?driveName=Azure",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files"
+					],
+					"query": [
+						{
+							"key": "driveName",
+							"value": "Files",
+							"disabled": true
+						},
+						{
+							"key": "driveName",
+							"value": "Azure"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Folder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Name",
+							"value": "Container3",
+							"type": "text"
+						},
+						{
+							"key": "StoragePath",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "isFile",
+							"value": "false",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files?driveName=Azure",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files"
+					],
+					"query": [
+						{
+							"key": "driveName",
+							"value": "Files",
+							"disabled": true
+						},
+						{
+							"key": "driveName",
+							"value": "Azure"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Download File",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files/5f8c1ee5-4e67-49ba-8b1d-0328a8c76c38/download?driveName=Azure",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files",
+						"5f8c1ee5-4e67-49ba-8b1d-0328a8c76c38",
+						"download"
+					],
+					"query": [
+						{
+							"key": "driveName",
+							"value": "Azure"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Folder/File",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files/b48d0c16-a09e-43a1-869a-900d8f77c0ff?driveName=Azure",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files",
+						"b48d0c16-a09e-43a1-869a-900d8f77c0ff"
+					],
+					"query": [
+						{
+							"key": "driveName",
+							"value": "Azure"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rename Folder/File",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"1Container\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files/d55ee33a-b03d-4325-885d-e3f0d5e2fb4c/rename?driveName=Azure",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files",
+						"d55ee33a-b03d-4325-885d-e3f0d5e2fb4c",
+						"rename"
+					],
+					"query": [
+						{
+							"key": "driveName",
+							"value": "Files",
+							"disabled": true
+						},
+						{
+							"key": "driveName",
+							"value": "Azure"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Move Folder/File",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files/90bd0c16-71f5-420c-b02e-4c561620bb3f/move/39816b5c-8f38-49ed-8c79-8011847462c3?driveName=Azure",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files",
+						"90bd0c16-71f5-420c-b02e-4c561620bb3f",
+						"move",
+						"39816b5c-8f38-49ed-8c79-8011847462c3"
+					],
+					"query": [
+						{
+							"key": "driveName",
+							"value": "Azure"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Copy Folder/File",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files/90bd0c16-71f5-420c-b02e-4c561620bb3f/copy/d55ee33a-b03d-4325-885d-e3f0d5e2fb4c?driveName=Azure",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files",
+						"90bd0c16-71f5-420c-b02e-4c561620bb3f",
+						"copy",
+						"d55ee33a-b03d-4325-885d-e3f0d5e2fb4c"
+					],
+					"query": [
+						{
+							"key": "driveName",
+							"value": "Azure"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Server Drive",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Azure\",\r\n  \"fileStorageAdapterType\": \"AzureBlobStorage\",\r\n  \"storagePath\": \"http://devaccessserveropenbots.blob.core.windows.net\",\r\n  \"connectionString\": \"DefaultEndpointsProtocol=https;AccountName=devaccessserveropenbots;AccountKey=qyYOTdq9rUxEcn73hQWqPVsR/w4HRmANkBR/KIjgX8Zb//gT9z4SUGeIA3TsI2W+dM8yC1aCdquXa3FdBKyzIA==;EndpointSuffix=core.windows.net\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files/drive",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"organizations",
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files",
+						"drive"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Drive Names",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}organizations/b2f85540-b7d7-4bbe-9577-1654e2d0ac09/files/driveNames?adapterType=AzureBlobStorage",
+					"host": [
+						"{{localhost}}organizations"
+					],
+					"path": [
+						"b2f85540-b7d7-4bbe-9577-1654e2d0ac09",
+						"files",
+						"driveNames"
+					],
+					"query": [
+						{
+							"key": "adapterType",
+							"value": "AzureBlobStorage"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -1,8 +1,8 @@
 Author: Nicole Carrero
 Creation Date: 8/18/2020
 
-Updated On: 11/11/2020
-Updated By: Dairon Hernandez
+Updated On: 3/18/2021
+Updated By: Nicole Carrero
 
 **Credentials Component**
 
@@ -38,39 +38,40 @@ Updated By: Dairon Hernandez
   - CredentialsController:
     - The CredentialsController will make an API request and access the CredentialRepository to retrieve the credentials from the Server and will return that information back to the view.  The controller will utilize this same structure to add, edit, or delete a credential.
     - Routes:
-      - All credentials: [HttpGet("api/v1/credentials")]
+    - NOTE: The current API version is 1.
+      - All credentials: [HttpGet("api/v{apiVersion}/credentials")]
         - Payloads
           - Input : none
           - Output : JSON file listing all credential information
-      - Count credentials: [HttpGet("api/v1/credentials/count")]
+      - Count credentials: [HttpGet("api/v{apiVersion}/credentials/count")]
         - Payloads
           - Input : none
           - Output : Number of credentials in the Server
-      - Credential details: [HttpGet("api/v1/credentials/{id}")]
+      - Credential details: [HttpGet("api/v{apiVersion}/credentials/{id}")]
         - Payloads
           - Input : Credential id
           - Output : JSON file listing credential details
-      - Credential view details [HttpGet("api/v1/credentials/view/{id}")]
+      - Credential view details [HttpGet("api/v{apiVersion}/credentials/view/{id}")]
         - Payloads
           - Input : Credential id
           - Output : JSON file listing specific credential details (Id, Name, Provider, StartDate, EndDate, Domain, UserName, Certificate)
-      - Create a credential: [HttpPost("api/v1/credentials")]
+      - Create a credential: [HttpPost("api/v{apiVersion}/credentials")]
         - Payloads
           - Input : Name, Provider, StartDate, EndDate, Domain, Username, PasswordSecret (SecureString to be hashed), PasswordHash, Certificate
           - Output : 200 OK response
-      - Update a credential: [HttpPut("api/v1/credentials/{id}")]
+      - Update a credential: [HttpPut("api/v{apiVersion}/credentials/{id}")]
         - Payloads
           - Input : Credential id, Name, Provider, StartDate, EndDate, Domain, Username, Password string (to be hashed), Password Secret, Certificate
           - Output : 200 OK response
-      - Update credential property: [HttpPatch("api/v1/credentials/{id}")]
+      - Update credential property: [HttpPatch("api/v{apiVersion}/credentials/{id}")]
         - Payloads
           - Input : JsonPatchDocument in request body with changes
           - Output : 200 OK response
-      - Delete a credential: [HttpDelete("api/v1/credentials/{id}")]
+      - Delete a credential: [HttpDelete("api/v{apiVersion}/credentials/{id}")]
         - Payloads
           - Input : Credential id
           - Output : 200 OK response
-      - Lookup list of credentials [HttpGet("api/v1/credentials/getlookup")]
+      - Lookup list of credentials [HttpGet("api/v{apiVersion}/credentials/getlookup")]
         - Payloads
           - Input : None
           - Output : JSON file listing all credential ids and names

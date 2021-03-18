@@ -1,7 +1,7 @@
 Author: Nicole Carrero
 Creation Date: 8/19/2020
 
-Updated On: 3/8/2021
+Updated On: 3/18/2021
 Updated By: Nicole Carrero
 
 **Queue Component**
@@ -47,144 +47,145 @@ Updated By: Nicole Carrero
 - Controllers:
   - QueuesController:
     - The QueuesController will make an API request to access the QueueRepository to retrieve all queues from the Server and will return that information back to the view.  The controller will utilize this same structure to add, edit, or delete a queue.
+    - NOTE: The current API version is 1.
     - Routes:
-      - All queues: [HttpGet("api/v1/queues")]
+      - All queues: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/queues")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file listing all queue information
-      - Queue count: [HttpGet("api/v1/queues/count")]
+      - Queue count: [HttpGet("api/v{apiVersion}/queues/organizations/{organizationId}/count")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : Count of queues in the Server
-      - Queue details: [HttpGet("api/v1/queues/{id}")]
+      - Queue details: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/queues/{id}")]
         - Payloads
-          - Input : None
+          - Input : Organization id
           - Output : JSON file listing specific queue information
-      - Create a queue: [HttpPost("api/v1/queues")]
+      - Create a queue: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/queues")]
         - Payloads
-          - Input : Queue model data
+          - Input : Organization id, Queue model data
           - Output : 200 OK response
-      - Update a queue: [HttpPut("api/v1/queues/{id}")]
+      - Update a queue: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/queues/{id}")]
         - Payloads
-          - Input : Queue id, Queue model data
+          - Input : Organization id, queue id, Queue model data
           - Output : 200 OK response
-      - Update a queue property: [HttpPatch("api/v1/queues/{id}")]
+      - Update a queue property: [HttpPatch("api/v{apiVersion}/organizations/{organizationId}/queues/{id}")]
         - Payloads
-          - Input : JSONPatchDocument in request body with changes
+          - Input : Organization id, JSONPatchDocument in request body with changes
           - Output : 200 Ok response
-      - Delete a queue: [HttpDelete("api/v1/queues/{id}")]
+      - Delete a queue: [HttpDelete("api/v{apiVersion}/organizations/{organizationId}/queues/{id}")]
         - Payloads
-          - Input : Queue id
+          - Input : Organization id, queue id
           - Output : 200 OK response
   - QueueItemsController:
     - The QueueItemsController will make an API request and use the QueueItemManager to execute any business logic involved.  It will then access the QueueItemRepository to retrieve all queue item transactions associated with that particular queue from the Server and will return the information back to the view.  The controller will utilize this same structure to add, edit, delete, or view details of a queue item transaction.
     - Routes:
-     - Queue items: [HttpGet("api/v1/queueitems")]
+     - Queue items: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/queueitems")]
        - Payloads
-         - Input : None
+         - Input : Organization id
          - Output : JSON file listing queue item information
-     - Queue items (view model): [HttpGet("api/v1/queueitems/view")]
+     - Queue items (view model): [HttpGet("api/v{apiVersion}/organizations/{organizationId}/queueitems/view")]
        - Payloads
-         - Input : None
+         - Input : Organization id
          - Output : JsON file listing queue item view model information
-     - Queue item details: [HttpGet("api/v1/queueitems/{id}")]
+     - Queue item details: [HttpGet("api//organizations/{organizationId}/queueitems/{id}")]
        - Payloads
-         - Input : Queue item id
+         - Input : Organization id, queue item id
          - Output : JSON file listing specific queue item information
-     - Queue items details (view model): [HttpGet("api/v1/queueitems/view/{id}")]
+     - Queue items details (view model): [HttpGet("api/v{apiVersion}/organizations/{organizationId}/queueitems/view/{id}")]
        - Payloads
-         - Input : Queue item id
+         - Input : Organization id, queue item id
          - Output : JSON file listing specific queue item view model information
-     - Queue item count: [HttpGet("api/v1/queueitems/count")]
+     - Queue item count: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/queueitems/count")]
        - Payloads
-         - Input : None
+         - Input : Organization id
          - Output: Count of queue items in the Server
-     - Delete a queue item: [HttpDelete("api/v1/queueitems/{id}")]
+     - Delete a queue item: [HttpDelete("api/v{apiVersion}/organizations/{organizationId}/queueitems/{id}")]
        - Payloads
-         - Input : Queue item id
+         - Input : Organization id, queue item id
          - Output : 200 OK response
-     - Update queue item property: [HttpPatch("api/v1/queueitems/{id}")]
+     - Update queue item property: [HttpPatch("api/v{apiVersion}/organizations/{organizationId}/queueitems/{id}")]
        - Payloads
-         - Input : JSONPatchDocument in request body with changes
+         - Input : Organization id, JSONPatchDocument in request body with changes
          - Output : 200 OK response
-     - Create queue item (enqueue): [HttpPost("api/v1/queueitems/enqueue")]
+     - Create queue item (enqueue): [HttpPost("api/v{apiVersion}/organizations/{organizationId}/queueitems/enqueue")]
        - Payloads
-         - Input : Queue item model data
+         - Input : Organization id, QueueItem model data
          - Output : JSON file listing new queue item view model information
-     - Pick up next available queue item (dequeue): [HttpPut("api/v1/queueitems/dequeue")]
+     - Pick up next available queue item (dequeue): [HttpPut("api/v{apiVersion}/organizations/{organizationId}/queueitems/dequeue")]
        - Payloads
-         - Input: Agent id, Queue id
+         - Input: Organization id, agent id, queue id
          - Output: JSON file listing specific queue item view model information
-     - Successful queue item (commit): [HttpPut("api/v1/queueitems/commit")]
+     - Successful queue item (commit): [HttpPut("api/v{apiVersion}/organizations/{organizationId}/queueitems/commit")]
        - Payloads
-         - Input : Lock transaction key
+         - Input : Organization id, lock transaction key
          - Output : JSON file listing updated queue item information
-     - Retry/fail queue item (rollback): [HttpPut("api/v1/queueitems/rollback")]
+     - Retry/fail queue item (rollback): [HttpPut("api/v{apiVersion}/organizations/{organizationId}/queueitems/rollback")]
        - Payloads
-         - Input : Lock transaction key, Error code (nullable), Error message (nullable), Is fatal (default set to false)
+         - Input : Organization id, lock transaction key, error code (nullable), error message (nullable), is fatal (default set to false)
          - Output : JSON file listing updated queue item information
-     - Extend queue item: [HttpPut("api/v1/queueitems/extend")]
+     - Extend queue item: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/queueitems/extend")]
        - Payloads
-         - Input : Lock transaction key
+         - Input : Organization id, lock transaction key
          - Output : JSON file listing updated queue item information
-     - Edit state: [HttpPut("api/v1/queueitems/{id}/state")]
+     - Edit state: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/queueitems/{id}/state")]
        - Payloads
-         - Input : Lock transaction key, State (nullable), State message (nullable), Error code (nullable), Error message (nullable)
+         - Input : Organization id, lock transaction key, state (nullable), state message (nullable), error code (nullable), error message (nullable)
          - Output : JSON file listing updated queue item information
-     - Edit queue item (with attachments): [HttpPut("api/v1/queueitems/{id}")]
+     - Edit queue item (with attachments): [HttpPut("api/v{apiVersion}/organizations/{organizationId}/queueitems/{id}")]
        - Payloads
-         - Input : Queue item id, Update queue item view model data (drive name is optional)
+         - Input : Organization id, queue item id, UpdateQueueItemViewModel data (drive name is optional)
          - Output : JSON file listing updated queue item view model information
   - QueueItemAttachmentsController:
     - The QueueItemAttachmentsController will make an API request and use the QueueItemManager to execute any business logic involved.  It will then access the QueueItemAttahmentRepository to retrieve all queue item attachments associated with that particular queue item from the Server and will return the information back to the view.  The controller will utilize this same structure to add, edit, delete, export, or view details of a queue item attachment.
     - Routes:
-     - Queue item attachments: [HttpGet("api/v1/queueitems/{queueItemId}/queueitemattachments")]
+     - Queue item attachments: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/queueitems/{queueItemId}/queueitemattachments")]
        - Payloads
-         - Input : Queue item id
+         - Input : Organization id, queue item id
          - Output : JSON file listing queue item attachment information
-     - Queue item attachments (view model): [HttpGet("api/v1/queueitems/{queueItemId}/queueitemattachments/view")]
+     - Queue item attachments (view model): [HttpGet("api/v{apiVersion}/organizations/{organizationId}/queueitems/{queueItemId}/queueitemattachments/view")]
        - Payloads
-         - Input : Queue item id
+         - Input : Organization id, queue item id
          - Output : JSON file listing queue item attachment view information
-     - Queue item count: [HttpGet("api/v1/queueitems/{queueItemId}/queueitemattachments/count")]
+     - Queue item count: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/queueitems/{queueItemId}/queueitemattachments/count")]
        - Payloads
-         - Input : Queue item id
+         - Input : Organization id, queue item id
          - Output : JSON file listing queue item attachment count
-     - Queue item attachment details: [HttpGet("api/v1/queueitems/{queueItemId}/queueitemattachments/{id}")]
+     - Queue item attachment details: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/queueitems/{queueItemId}/queueitemattachments/{id}")]
        - Payloads
-         - Input : Queue item id, attachment id
+         - Input : Organization id, queue item id, attachment id
          - Output : JSON file listing specific queue item attachment information
-     - Queue item attachments: [HttpGet("api/v1/queueitems/{queueItemId}/queueitemattachments")]
+     - Queue item attachments: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/queueitems/{queueItemId}/queueitemattachments")]
        - Payloads
-         - Input : None
+         - Input : Organization id
          - Output : JSON file listing queue item attachment information
-     - Create queue item attachment (existing files): [HttpPost("api/v1/queueitems/{queueItemId}/queueitemattachments/files")]
+     - Create queue item attachment (existing files): [HttpPost("api/v{apiVersion}/organizations/{organizationId}/queueitems/{queueItemId}/queueitemattachments/files")]
        - Payloads
-         - Input : Queue item id, attachment id, array of file ids
+         - Input : Organization id, queue item id, attachment id, array of file ids
          - Output : JSON file listing queue item attachment information for a specific queue item
-     - Create queue item attachment: [HttpPost("api/v1/queueitems/{queueItemId}/queueitemattachments")]
+     - Create queue item attachment: [HttpPost("api/v{apiVersion}/organizations/{organizationId}/queueitems/{queueItemId}/queueitemattachments")]
        - Payloads
-         - Input : Queue item id, attachment id, files to be attached
+         - Input : Organization id, queue item id, attachment id, files to be attached
          - Output : JSON file listing queue item attachment information for a specific queue item
-     - Edit queue item attachment with file: [HttpPut("api/v1/queueitems/{queueItemId}/queueitemattachments/{id}/update")]
+     - Edit queue item attachment with file: [HttpPut("api/v{apiVersion}/organizations/{organizationId}/queueitems/{queueItemId}/queueitemattachments/{id}/update")]
        - Payloads
-         - Input : Queue item id, attachment id, file to be updated, optional query parameter ("?driveName={driveName}")
+         - Input : Organization id, queue item id, attachment id, file to be updated, optional query parameter ("?driveName={driveName}")
          - Output : JSON file listing specific queue item attachment information
-     - Edit queue item attachment property: [HttpPatch("api/v1/queueitems/{queueItemId}/queueitemattachments/{id}")]
+     - Edit queue item attachment property: [HttpPatch("api/v{apiVersion}/organizations/{organizationId}/queueitems/{queueItemId}/queueitemattachments/{id}")]
        - Payloads
-         - Input : Queue item id, attachment id, JSONPatchDocument in request body with changes
+         - Input : Organization id, queue item id, attachment id, JSONPatchDocument in request body with changes
          - Output : 200 OK response
-     - Delete all queue item attachments for a queue item: [HttpDelete("api/v1/queueitems/{queueItemId}/queueitemattachments")]
+     - Delete all queue item attachments for a queue item: [HttpDelete("api/v{apiVersion}/organizations/{organizationId}/queueitems/{queueItemId}/queueitemattachments")]
        - Payloads
-         - Input : Queue item id, attachment id, optional query parameter ("?driveName={driveName}")
+         - Input : Organization id, queue item id, attachment id, optional query parameter ("?driveName={driveName}")
          - Output : 200 OK response
-     - Delete queue item attachment: [HttpDelete("api/v1/queueitems/{queueItemId}/queueitemattachments/{id}")]
+     - Delete queue item attachment: [HttpDelete("api/v{apiVersion}/organizations/{organizationId}/queueitems/{queueItemId}/queueitemattachments/{id}")]
        - Payloads
-         - Input : Queue item id, attachment id, optional query parameter ("?driveName={driveName}")
+         - Input : Organization id, queue item id, attachment id, optional query parameter ("?driveName={driveName}")
          - Output : 200 OK response
-    - Export queue item attachment: [HttpGet("api/v1/queueitems/{queueItemId}/queueItemAttachments/{id}/export")]
+    - Export queue item attachment: [HttpGet("api/v{apiVersion}/organizations/{organizationId}/queueitems/{queueItemId}/queueItemAttachments/{id}/export")]
       - Payloads
-        - Input : Queue item id, attachment id
+        - Input : Organization id, queue item id, attachment id
         - Output : Queue item attachment file
 - Managers:
   - QueueManager:
